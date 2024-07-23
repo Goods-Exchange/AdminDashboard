@@ -13,6 +13,8 @@ import {
   getAllAccountsThunk,
   getUserDetailThunk,
   updateStatusAccountThunk,
+  approveUserThunk,
+  denyUserThunk,
 } from "../../../../store/apiThunk/userThunk";
 import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination/pagination";
@@ -40,38 +42,61 @@ export default function verifyaccount() {
     dispatch(getAllVerifyUsersThunk());
   }, []);
 
+  // const handleAccept = (id) => {
+  //   setShowLoadingModal(true);
+  //   dispatch(approveUserThunk(id)).then(() => {
+  //     dispatch(getAllVerifyUsersThunk()).then(setShowLoadingModal(false));
+  //   });
+  // };
   const handleAccept = (id) => {
     setShowLoadingModal(true);
-    // dispatch(asd(id)).then(() => {
-    //   dispatch(getAllVerifyUsersThunk()).then(setShowLoadingModal(false));
-    // });
+    dispatch(approveUserThunk(id))
+      .then(() => {
+        dispatch(getAllVerifyUsersThunk()).then(() => {
+          setShowLoadingModal(false);
+          Swal.fire({
+            title: "Success!",
+            text: "User has been approved.",
+            icon: "success",
+          });
+        });
+      })
+      .catch((error) => {
+        setShowLoadingModal(false);
+        Swal.fire({
+          title: "Error!",
+          text: "There was an issue approving the user.",
+          icon: "error",
+        });
+      });
   };
 
-  //   const handleDeny = (id) => {
-  //     setShowLoadingModal(true);
-  //     Swal.fire({
-  //       title: "Are you sure?",
-  //       text: "You won't be able to revert this!",
-  //       icon: "warning",
-  //       showCancelButton: true,
-  //       confirmButtonColor: "#3085d6",
-  //       cancelButtonColor: "#d33",
-  //       confirmButtonText: "Yes, delete it!",
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         dispatch(asd(id)).then(() => {
-  //           dispatch(getAllVerifyUsersThunk()).then(() => {
-  //             Swal.fire({
-  //               title: "Deleted!",
-  //               text: "Your file has been deleted.",
-  //               icon: "success",
-  //             });
-  //             setShowLoadingModal(false);
-  //           });
-  //         });
-  //       }
-  //     });
-  //   };
+  const handleDeny = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setShowLoadingModal(true);
+        dispatch(denyUserThunk(id)).then(() => {
+          dispatch(getAllVerifyUsersThunk()).then(() => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            }).then(() => {
+              setShowLoadingModal(false);
+            });
+          });
+        });
+      }
+    });
+  };
 
   const columns = [
     {
@@ -173,7 +198,7 @@ export default function verifyaccount() {
                 minWidth: "97px",
                 textTransform: "capitalize",
               }}
-              //   onClick={handleDeny(id)}
+              onClick={() => handleDeny(id)}
             >
               Tu Choi
             </Button>

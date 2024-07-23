@@ -46,6 +46,26 @@ export const updateUserData = async (data) => {
   return response.data;
 };
 
+
+// export const approveUser = async (data) => {
+//   const response = await api.put(`/api/v1/VerifyUses/ApproveUser/`, data, {//approve the user in verification
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//   });
+//   return response.data;
+// };
+
+export const approveUser = async (id) => {
+  const response = await api.put(`/api/v1/VerifyUses/ApproveUser/${id}`); //approve the user in verification
+  return response.data;
+};
+
+export const denyUser = async (id) => {
+  const response = await api.put(`/api/v1/VerifyUses/DenyUser/${id}`);
+  return response.data;
+};
+
 export const getUserDetail = async (id) => {
   const response = await api.get(`/api/v1/auths/${id}`);
   return response.data;
