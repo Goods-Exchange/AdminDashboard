@@ -22,6 +22,8 @@ import {
   getAllUsers,
   approveUser,
   denyUser,
+  banUser,
+  unbanUser
 
 } from "../../api/user";
 
@@ -135,6 +137,18 @@ export const approveUserThunk = createAsyncThunk(
     }
   }
 );
+//unban user from account
+export const unbanUserThunk = createAsyncThunk(
+  "users/unbanUser",
+  async (userId, thunkAPI) => {
+    try {
+      const response = await unbanUser(userId);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
 
 //deny the user in verification
 export const denyUserThunk = createAsyncThunk(
@@ -142,6 +156,18 @@ export const denyUserThunk = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await denyUser(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+//ban user from account
+export const banUserThunk = createAsyncThunk(
+  "users/banUser",
+  async (userId, thunkAPI) => {
+    try {
+      const response = await banUser(userId);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

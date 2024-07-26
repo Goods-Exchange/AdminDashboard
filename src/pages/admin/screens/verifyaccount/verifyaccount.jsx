@@ -151,7 +151,9 @@ export default function verifyaccount() {
       headerName: "Hình ảnh",
       headerAlign: "center",
       flex: 1,
-      renderCell: ({ row: { profileImage } }) => <img style={{height:"160px",padding:20}} src={profileImage} />,
+      renderCell: ({ row: { profileImage } }) => (
+        <img style={{ height: "160px", padding: 20 }} src={profileImage} />
+      ),
     },
     {
       field: "verifyStatus",
@@ -178,7 +180,7 @@ export default function verifyaccount() {
       flex: 1,
       renderCell: ({ row: { id } }) => {
         return (
-          <Box width="100%" display="flex" justifyContent="center" gap="4px" >
+          <Box width="100%" display="flex" justifyContent="center" gap="4px">
             <Button
               variant="contained"
               style={{
@@ -215,11 +217,15 @@ export default function verifyaccount() {
     accounts?.map((account, index) => ({
       ...account,
       order: index + 1,
+      // id: account.userId,
     })) || [];
 
   return (
     <Box m="20px">
-      <Header title="XÁC MINH TÀI KHOẢN" subtitle="Xác minh Tài Khoản Hệ Thống"  />
+      <Header
+        title="XÁC MINH TÀI KHOẢN"
+        subtitle="Xác minh Tài Khoản Hệ Thống"
+      />
       {/* <div
         style={{
           color: "#3045FF",
@@ -266,6 +272,7 @@ export default function verifyaccount() {
           }}
           rows={rows}
           columns={columns}
+          // getRowId={(row) => row.id}
         />
         {/* <AccountBackdrop
                     open={open}

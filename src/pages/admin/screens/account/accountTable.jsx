@@ -16,6 +16,8 @@ import {
   getAllUsersThunk,
   approveUserThunk,
   denyUserThunk,
+  banUserThunk,
+  unbanUserThunk
 } from "../../../../store/apiThunk/userThunk";
 import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination/pagination";
@@ -33,14 +35,14 @@ import Swal from "sweetalert2";
 export default function accountTable() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const accounts = useSelector(allVerifyUsersSelector);
+  const accounts = useSelector(allAccountsSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
-
+  console.log(accounts);
   useEffect(() => {
-    dispatch(getAllVerifyUsersThunk());
+    dispatch(getAllUsersThunk());
   }, []);
 
   // const handleAccept = (id) => {
@@ -51,9 +53,9 @@ export default function accountTable() {
   // };
   const handleAccept = (id) => {
     setShowLoadingModal(true);
-    dispatch(approveUserThunk(id))
+    dispatch(banUserThunk(id))
       .then(() => {
-        dispatch(getAllVerifyUsersThunk()).then(() => {
+        dispatch(getAllUsersThunk()).then(() => {
           setShowLoadingModal(false);
           Swal.fire({
             title: "Success!",
@@ -84,8 +86,8 @@ export default function accountTable() {
     }).then((result) => {
       if (result.isConfirmed) {
         setShowLoadingModal(true);
-        dispatch(denyUserThunk(id)).then(() => {
-          dispatch(getAllVerifyUsersThunk()).then(() => {
+        dispatch(unbanUserThunk(id)).then(() => {
+          dispatch(getAllUsersThunk()).then(() => {
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
@@ -123,7 +125,7 @@ export default function accountTable() {
       renderCell: ({ row: { id, email } }) => {
         const handleOpen = () => {
           setShowLoadingModal(true);
-          dispatch(getUserDetailThunk(id)).then(() => {
+          dispatch(getAllUsersThunk(id)).then(() => {
             setShowLoadingModal(false);
             setOpen(true);
           });
@@ -136,10 +138,10 @@ export default function accountTable() {
       },
     },
     {
-      field: "userName",
+      field: "username",
       headerName: "User Name",
       flex: 1,
-      renderCell: ({ row: { userName } }) => <div>{userName}</div>,
+      renderCell: ({ row: { username } }) => <div>{username}</div>,
     },
     {
       field: "fullName",
@@ -148,10 +150,10 @@ export default function accountTable() {
       renderCell: ({ row: { fullname } }) => <div>{fullname}</div>,
     },
     {
-      field: "roleName",
+      field: "role",
       headerName: "Vai Trò",
       flex: 1,
-      renderCell: ({ row: { roleName } }) => <div>{roleName}</div>,
+      renderCell: ({ row: { role } }) => <div>{role}</div>,
     },
 
     // {
@@ -161,21 +163,16 @@ export default function accountTable() {
     //   renderCell: ({ row: { profileImage } }) => <img style={{height:"160px",padding:20}} src={profileImage} />,
     // },
     {
-      field: "verifyStatus",
+      field: "status",
       headerName: "Tình trạng",
       flex: 1,
-      renderCell: ({ row: { verifyStatus } }) => (
+      renderCell: ({ row: { status } }) => (
         <div
           style={{
-            color:
-              verifyStatus === "Pending"
-                ? "yellow"
-                : verifyStatus === "Approved"
-                ? "green"
-                : "red",
+            color: status === "Not ban" ? "green" : "red",
           }}
         >
-          {verifyStatus}
+          {status}
         </div>
       ),
     },
@@ -197,7 +194,7 @@ export default function accountTable() {
               }}
               onClick={() => handleAccept(id)}
             >
-              Đồng ý
+              Chặn
             </Button>
             <Button
               variant="contained"
@@ -210,7 +207,7 @@ export default function accountTable() {
               }}
               onClick={() => handleDeny(id)}
             >
-              Từ chối
+              Hủy chặn
             </Button>
           </Box>
         );
