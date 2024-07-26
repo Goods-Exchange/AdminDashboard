@@ -63,7 +63,7 @@ export default function PackageTable(props) {
       ),
     },
     {
-      field: "description",
+      field: "subcriptionType",
       headerName: "Loại Gói",
       flex: 1,
       cellClassName: "name-column--cell",

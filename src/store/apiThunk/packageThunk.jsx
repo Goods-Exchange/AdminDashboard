@@ -41,6 +41,7 @@ export const createPackageThunk = createAsyncThunk(
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);
+            
         }
     }
 );

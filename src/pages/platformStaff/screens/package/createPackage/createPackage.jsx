@@ -25,37 +25,23 @@ export default function CreatePackage() {
     const formik = useFormik({
         initialValues: {
             description: "",
-            duration: "",
-            promotionAmount: "",
-            promotionDiscount: "",
+            expiryMonth: "",
+            price: "",
+            subcriptionType: "",
         },
         validationSchema: Yup.object({
-            description: Yup.string().required("Loại gói không thể trống"),
-            duration: Yup.number().required("Thời hạn không thể trống"),
-            promotionAmount: Yup.string()
-                .required("Giá tiền không thể trống")
-                .test("valid-amount", "Giá tiền ít nhất là 10,000", (value) => {
-                    const amount = parseInt(value);
-                    return amount >= 10000;
-                })
-                .test(
-                    "valid-format",
-                    "Giá tiền phải chia hết cho 1,000",
-                    (value) => {
-                        const amount = parseInt(value);
-                        return amount % 1000 === 0;
-                    }
-                ),
-            promotionDiscount: Yup.number(),
+            description: Yup.string().required("Mô tả không thể trống"),
+            expiryMonth: Yup.number().required("Tháng không thể trống"),
+            
         }),
         onSubmit: async (values) => {
             setShowLoadingModal(true);
             dispatch(
                 createPackageThunk({
                     description: values.description,
-                    duration: values.duration,
-                    promotionAmount: values.promotionAmount,
-                    promotionDiscount: values.promotionDiscount,
+                    expiryMonth: values.expiryMonth,
+                    price: values.price,
+                    subcriptionType: values.subcriptionType,
                 })
             )
                 .unwrap()
@@ -91,12 +77,12 @@ export default function CreatePackage() {
         },
     });
 
-    const handleInputChange = (event, formik) => {
-        let inputValue = event.target.value;
-        let rawValue = inputValue.replace(/[^0-9]/g, "");
-        formik.setFieldValue("promotionAmount", rawValue);
-        event.target.value = FormatCurrency(rawValue);
-    };
+    // const handleInputChange = (event, formik) => {
+    //     let inputValue = event.target.value;
+    //     let rawValue = inputValue.replace(/[^0-9]/g, "");
+    //     formik.setFieldValue("promotionAmount", rawValue);
+    //     event.target.value = FormatCurrency(rawValue);
+    // };
 
     return (
         <div className="createPackage">
@@ -105,13 +91,37 @@ export default function CreatePackage() {
                 subtitle="Cung cấp thông tin gói đăng ký"
             />
             <form onSubmit={formik.handleSubmit}>
-                {/* description */}
+                {/* subcriptionType */}
                 <>
+                    <TextField
+                        id="subcriptionType"
+                        label={
+                            <span>
+                                Loại Gói <span style={{ color: "red" }}>*</span>
+                            </span>
+                        }
+                        variant="outlined"
+                        value={formik.values.subcriptionType}
+                        onChange={formik.handleChange}
+                        fullWidth
+                        autoComplete="subcriptionType"
+                        margin="dense"
+                        color="secondary"
+                    />
+                    {formik.touched.subcriptionType &&
+                        formik.errors.subcriptionType && (
+                            <div className="login__validation__error">
+                                <p>{formik.errors.subcriptionType}</p>
+                            </div>
+                        )}
+                </>
+                     {/* description */}
+                     <>
                     <TextField
                         id="description"
                         label={
                             <span>
-                                Loại Gói <span style={{ color: "red" }}>*</span>
+                                Mô tả <span style={{ color: "red" }}>*</span>
                             </span>
                         }
                         variant="outlined"
@@ -129,10 +139,11 @@ export default function CreatePackage() {
                             </div>
                         )}
                 </>
-                {/* duration */}
+                
+                {/* expiryMonth */}
                 <>
                     <TextField
-                        id="duration"
+                        id="expiryMonth"
                         label={
                             <span>
                                 Thời Hạn (tháng){" "}
@@ -140,66 +151,43 @@ export default function CreatePackage() {
                             </span>
                         }
                         variant="outlined"
-                        value={formik.values.duration}
+                        value={formik.values.expiryMonth}
                         onChange={formik.handleChange}
                         fullWidth
-                        autoComplete="duration"
+                        autoComplete="expiryMonth"
                         margin="dense"
                         type="number"
                         color="secondary"
                     />
-                    {formik.touched.duration && formik.errors.duration && (
+                    {formik.touched.expiryMonth && formik.errors.expiryMonth && (
                         <div className="login__validation__error">
-                            <p>{formik.errors.duration}</p>
+                            <p>{formik.errors.expiryMonth}</p>
                         </div>
                     )}
                 </>
-                {/* promotionAmount */}
+                {/* price */}
+                {/* price */}
                 <>
                     <TextField
-                        id="promotionAmount"
-                        label={
-                            <span>
-                                Giá Tiền <span style={{ color: "red" }}>*</span>
-                            </span>
-                        }
+                        id="price"
+                        label={"Gía tiền"}
                         variant="outlined"
-                        value={FormatCurrency(formik.values.promotionAmount)}
-                        onChange={(e) => handleInputChange(e, formik)}
-                        fullWidth
-                        autoComplete="promotionAmount"
-                        margin="dense"
-                        type="string"
-                        color="secondary"
-                    />
-                    {formik.touched.promotionAmount &&
-                        formik.errors.promotionAmount && (
-                            <div className="login__validation__error">
-                                <p>{formik.errors.promotionAmount}</p>
-                            </div>
-                        )}
-                </>
-                {/* promotionDiscount */}
-                <>
-                    <TextField
-                        id="promotionDiscount"
-                        label={"Chiết Khấu (%)"}
-                        variant="outlined"
-                        value={formik.values.promotionDiscount}
+                        value={formik.values.price}
                         onChange={formik.handleChange}
                         fullWidth
-                        autoComplete="promotionDiscount"
+                        autoComplete="price"
                         margin="dense"
                         type="number"
                         color="secondary"
                     />
-                    {formik.touched.promotionDiscount &&
-                        formik.errors.promotionDiscount && (
+                    {formik.touched.price &&
+                        formik.errors.price && (
                             <div className="login__validation__error">
-                                <p>{formik.errors.promotionDiscount}</p>
+                                <p>{formik.errors.price}</p>
                             </div>
                         )}
                 </>
+                
                 {!showLoadingModal ? (
                     <div
                         style={{

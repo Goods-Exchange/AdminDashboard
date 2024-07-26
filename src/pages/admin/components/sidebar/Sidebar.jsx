@@ -132,7 +132,7 @@ const Sidebar = (props) => {
                                 Thống Kê
                             </Typography>
                             <Item
-                                title="Thu Nhập"
+                                title="Admin Dashboard"
                                 to=""
                                 icon={<BarChartIcon />}
                                 selected={selected}

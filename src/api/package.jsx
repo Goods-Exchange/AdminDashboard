@@ -20,12 +20,13 @@ export const updatePackage = async (data) => {
 };
 
 export const createPackage = async (data) => {
-    const response = await api.post(`/api/v1/packages`, data);
+    const response = await api.post(`/api/v1/Subcription/CreateSubscription`, data
+      );
     return response.data;
 };
 
 export const deletePackage = async (id) => {
-    const response = await api.delete(`/api/v1/packages/${id}`);
+    const response = await api.delete(`/api/v1/Subcription/DeactiveSubscription/${id}`);
     return response.data;
 };
 
