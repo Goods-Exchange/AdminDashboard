@@ -136,7 +136,7 @@ export default function verifyaccount() {
     },
     {
       field: "userName",
-      headerName: "Ten Tai Khoan",
+      headerName: "Tên tài khoản",
       flex: 1,
       renderCell: ({ row: { userName } }) => <div>{userName}</div>,
     },
@@ -148,13 +148,14 @@ export default function verifyaccount() {
     },
     {
       field: "profileImage",
-      headerName: "Hinh anh",
+      headerName: "Hình ảnh",
+      headerAlign: "center",
       flex: 1,
-      renderCell: ({ row: { profileImage } }) => <img src={profileImage} />,
+      renderCell: ({ row: { profileImage } }) => <img style={{height:"160px",padding:20}} src={profileImage} />,
     },
     {
       field: "verifyStatus",
-      headerName: "Tinh Trang",
+      headerName: "Tình trạng",
       flex: 1,
       renderCell: ({ row: { verifyStatus } }) => (
         <div
@@ -173,34 +174,36 @@ export default function verifyaccount() {
     },
     {
       field: "action",
-      headerName: "Hanh Dong",
+      headerName: "Hành động",
       flex: 1,
       renderCell: ({ row: { id } }) => {
         return (
-          <Box width="100%" display="flex" justifyContent="center" gap="10px">
+          <Box width="100%" display="flex" justifyContent="center" gap="4px" >
             <Button
               variant="contained"
               style={{
                 // backgroundColor:
                 //   status === "Active" ? "#55ab95" : colors.redAccent[600],
-                minWidth: "97px",
+                backgroundColor: "#55ab95",
+                minWidth: "50px",
                 textTransform: "capitalize",
               }}
               onClick={() => handleAccept(id)}
             >
-              Dong Y
+              Đồng ý
             </Button>
             <Button
               variant="contained"
               style={{
                 // backgroundColor:
                 //   status === "Active" ? "#55ab95" : colors.redAccent[600],
-                minWidth: "97px",
+                backgroundColor: colors.redAccent[600],
+                minWidth: "50px",
                 textTransform: "capitalize",
               }}
               onClick={() => handleDeny(id)}
             >
-              Tu Choi
+              Từ chối
             </Button>
           </Box>
         );
@@ -216,8 +219,8 @@ export default function verifyaccount() {
 
   return (
     <Box m="20px">
-      {/* <Header title="TÀI KHOẢN" subtitle="Quản Lý Tài Khoản Hệ Thống"  /> */}
-      <div
+      <Header title="XÁC MINH TÀI KHOẢN" subtitle="Xác minh Tài Khoản Hệ Thống"  />
+      {/* <div
         style={{
           color: "#3045FF",
           fontSize: 34,
@@ -227,8 +230,8 @@ export default function verifyaccount() {
         }}
       >
         TÀI KHOẢN
-      </div>
-      <div
+      </div> */}
+      {/* <div
         style={{
           color: "#2a2d64",
           fontSize: 20,
@@ -237,7 +240,7 @@ export default function verifyaccount() {
         }}
       >
         Quản Lý Tài Khoản Hệ Thống
-      </div>
+      </div> */}
       {/* <FilterComponent
         label="Vai Trò"
         name="role"

@@ -123,6 +123,11 @@ export const getAllVerifyUsers = async () => {
   return response.data;
 };
 
+export const getAllUsers = async () => {
+  const response = await api.get(`/api/v1/User/GetAllUsers`); //La get API All users
+  return response.data;
+};
+
 export const getAllAccounts = async (role, pageNumber, pageSize) => {
   const response = await api.get(
     `/api/v1/auths/accounts?Roles=${role}&PageNumber=${pageNumber}&PageSize=${pageSize}`

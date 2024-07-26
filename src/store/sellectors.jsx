@@ -2,7 +2,7 @@ export const userDetailSelector = (state) => state.userDetail.entities;
 export const userDataSelector = (state) => state.userData.entities;
 export const staffsSelector = (state) => state.staffs.entities;
 
-export const allAccountsSelector = (state) => state.allAccounts.entities;
+export const allAccountsSelector = (state) => state.allAccounts.entities; //allAccountUsers
 export const allVerifyUsersSelector = (state) => state.allVerifyUsers.entities; //allVerifyUsers
 
 export const petDetailSelector = (state) => state.petDetail.entities;
@@ -10,16 +10,16 @@ export const petsFromShopSelector = (state) => state.petsFromShop.entities;
 export const petsFromAreaSelector = (state) => state.petsFromArea.entities;
 
 export const petCoffeeShopDetailSelector = (state) =>
-    state.petCoffeeShopDetail.entities;
+  state.petCoffeeShopDetail.entities;
 export const allPetCoffeeShopsSelector = (state) =>
-    state.allPetCoffeeShops.entities;
+  state.allPetCoffeeShops.entities;
 export const petCoffeeShopsSelector = (state) => state.petCoffeeShops.entities;
 export const petCoffeeShopTaxCodeSelector = (state) =>
-    state.petCoffeeShopTaxCode.entities;
+  state.petCoffeeShopTaxCode.entities;
 export const popularPetCoffeeShopsSelector = (state) =>
-    state.popularPetCoffeeShops.entities;
+  state.popularPetCoffeeShops.entities;
 export const randomPetCoffeeShopsSelector = (state) =>
-    state.randomPetCoffeeShops.entities;
+  state.randomPetCoffeeShops.entities;
 
 export const allFollowShopsSelector = (state) => state.allFollowShops.entities;
 
@@ -32,16 +32,16 @@ export const momentDetailSelector = (state) => state.momentDetail.entities;
 export const eventDetailSelector = (state) => state.eventDetail.entities;
 export const eventsFromShopSelector = (state) => state.eventsFromShop.entities;
 export const eventDetailForCustomerSelector = (state) =>
-    state.eventDetailForCustomer.entities;
+  state.eventDetailForCustomer.entities;
 export const joinEventsSelector = (state) => state.joinEvents.entities;
 export const allEventSubmitsSelector = (state) =>
-    state.allEventSubmits.entities;
+  state.allEventSubmits.entities;
 
 export const vaccinationsFromPetSelector = (state) =>
-    state.vaccinationsFromPet.entities;
+  state.vaccinationsFromPet.entities;
 
 export const vaccinationDetailSelector = (state) =>
-    state.vaccinationDetail.entities;
+  state.vaccinationDetail.entities;
 
 export const postDetailSelector = (state) => state.postDetail.entities;
 export const postSelector = (state) => state.post.entities;
@@ -60,44 +60,44 @@ export const walletSelector = (state) => state.wallet.entities;
 export const managerIncomeSelector = (state) => state.managerIncome.entities;
 export const managerOutcomeSelector = (state) => state.managerOutcome.entities;
 export const shopMonthIncomeSelector = (state) =>
-    state.shopMonthIncome.entities;
+  state.shopMonthIncome.entities;
 export const managerMonthIncomeSelector = (state) =>
-    state.managerMonthIncome.entities;
+  state.managerMonthIncome.entities;
 export const managerMonthOutcomeSelector = (state) =>
-    state.managerMonthOutcome.entities;
+  state.managerMonthOutcome.entities;
 export const shopMonthOutcomeSelector = (state) =>
-    state.shopMonthOutcome.entities;
+  state.shopMonthOutcome.entities;
 export const shopOutcomeSelector = (state) => state.shopOutcome.entities;
 export const shopIncomeSelector = (state) => state.shopIncome.entities;
 export const platformIncomeSelector = (state) => state.platformIncome.entities;
 export const platformMonthIncomeSelector = (state) =>
-    state.platformMonthIncome.entities;
+  state.platformMonthIncome.entities;
 
-export const packagesSelector = (state) => state.packages.entities;
+export const packagesSelector = (state) => state.packages.entities; //GetAllSubscription
 export const packageDetailSelector = (state) => state.packageDetail.entities;
 
 export const allReportsSelector = (state) => state.allReports.entities;
 export const shopReportsSelector = (state) => state.shopReports.entities;
 
 export const transactionDetailSelector = (state) =>
-    state.transactionDetail.entities;
+  state.transactionDetail.entities;
 export const transactionsFromShopSelector = (state) =>
-    state.transactionsFromShop.entities;
+  state.transactionsFromShop.entities;
 
 export const allOrdersSelector = (state) => state.allOrders.entities;
 export const ordersFromShopSelector = (state) => state.ordersFromShop.entities;
 export const orderDetailSelector = (state) => state.orderDetail.entities;
 
 export const allNotificationsSelector = (state) =>
-    state.allNotifications.entities;
+  state.allNotifications.entities;
 export const unreadNotificationsSelector = (state) =>
-    state.unreadNotifications.entities;
+  state.unreadNotifications.entities;
 
 export const promotionDetailSelector = (state) =>
-    state.promotionDetail.entities;
+  state.promotionDetail.entities;
 export const promotionsFromShopSelector = (state) =>
-    state.promotionsFromShop.entities;
+  state.promotionsFromShop.entities;
 
 export const productDetailSelector = (state) => state.productDetail.entities;
 export const productsFromShopSelector = (state) =>
-    state.productsFromShop.entities;
+  state.productsFromShop.entities;

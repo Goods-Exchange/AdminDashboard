@@ -4,271 +4,283 @@ import { tokens } from "../../../../theme";
 import Header from "../../components/header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    allAccountsSelector,
-    userDetailSelector,
+  allAccountsSelector,
+  // userDetailSelector,
+  allVerifyUsersSelector,
 } from "../../../../store/sellectors";
 import {
-    getAllAccountsThunk,
-    getUserDetailThunk,
-    updateStatusAccountThunk,
+  getAllVerifyUsersThunk,
+  getAllAccountsThunk,
+  getUserDetailThunk,
+  updateStatusAccountThunk,
+  getAllUsersThunk,
+  approveUserThunk,
+  denyUserThunk,
 } from "../../../../store/apiThunk/userThunk";
 import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination/pagination";
 import { AccRole } from "../../../../components/mapping/mapping";
 import {
-    StyledBox,
-    CustomNoRowsOverlay,
-    GridLoadingOverlay,
+  StyledBox,
+  CustomNoRowsOverlay,
+  GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
 import { FilterComponent } from "../../../../components/filter/filterComponent";
 import { FormatPhoneNumber } from "../../../../components/format/formatText/formatText";
 import { AccountBackdrop } from "../../../../components/backdrop/accountBackdrop/accountBackdrop";
+import Swal from "sweetalert2";
 
-export default function AccountTable() {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    const accounts = useSelector(allAccountsSelector);
-    const userDetail = useSelector(userDetailSelector);
-    const dispatch = useDispatch();
-    const [showLoadingModal, setShowLoadingModal] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [popoverId, setPopoverId] = useState(null);
-    const [popoverStatus, setPopoverStatus] = useState(null);
-    const [role, setRole] = useState("all");
-    const [pageSize, setPageSize] = useState(10);
-    const [pageNumber, setPageNumber] = useState(1);
-    const [open, setOpen] = useState(false);
+export default function accountTable() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const accounts = useSelector(allVerifyUsersSelector);
+  const dispatch = useDispatch();
+  const [showLoadingModal, setShowLoadingModal] = useState(false);
+  const [pageSize, setPageSize] = useState(10);
+  const [pageNumber, setPageNumber] = useState(1);
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  useEffect(() => {
+    dispatch(getAllVerifyUsersThunk());
+  }, []);
 
-    useEffect(() => {
+  // const handleAccept = (id) => {
+  //   setShowLoadingModal(true);
+  //   dispatch(approveUserThunk(id)).then(() => {
+  //     dispatch(getAllVerifyUsersThunk()).then(setShowLoadingModal(false));
+  //   });
+  // };
+  const handleAccept = (id) => {
+    setShowLoadingModal(true);
+    dispatch(approveUserThunk(id))
+      .then(() => {
+        dispatch(getAllVerifyUsersThunk()).then(() => {
+          setShowLoadingModal(false);
+          Swal.fire({
+            title: "Success!",
+            text: "User has been approved.",
+            icon: "success",
+          });
+        });
+      })
+      .catch((error) => {
+        setShowLoadingModal(false);
+        Swal.fire({
+          title: "Error!",
+          text: "There was an issue approving the user.",
+          icon: "error",
+        });
+      });
+  };
+
+  const handleDeny = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
         setShowLoadingModal(true);
-        const fetchAccounts =
-            role !== "all"
-                ? dispatch(
-                      getAllAccountsThunk({ role: role, pageNumber, pageSize })
-                  )
-                : dispatch(
-                      getAllAccountsThunk({ role: "", pageNumber, pageSize })
-                  );
-        fetchAccounts.then(() => setShowLoadingModal(false));
-    }, [role, pageNumber, pageSize]);
+        dispatch(denyUserThunk(id)).then(() => {
+          dispatch(getAllVerifyUsersThunk()).then(() => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            }).then(() => {
+              setShowLoadingModal(false);
+            });
+          });
+        });
+      }
+    });
+  };
 
-    const columns = [
-        {
-            field: "order",
-            headerName: "STT",
-            headerAlign: "center",
-            renderCell: ({ row: { order } }) => (
-                <Box
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    width="100%"
-                >
-                    {order}
-                </Box>
+  const columns = [
+    {
+      field: "order",
+      headerName: "STT",
+      headerAlign: "center",
+      renderCell: ({ row: { order } }) => (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+        >
+          {order}
+        </Box>
+      ),
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+      cellClassName: "name-column--cell",
+      renderCell: ({ row: { id, email } }) => {
+        const handleOpen = () => {
+          setShowLoadingModal(true);
+          dispatch(getUserDetailThunk(id)).then(() => {
+            setShowLoadingModal(false);
+            setOpen(true);
+          });
+        };
+        return (
+          <div onClick={handleOpen} style={{ cursor: "pointer" }}>
+            {email}
+          </div>
+        );
+      },
+    },
+    {
+      field: "userName",
+      headerName: "User Name",
+      flex: 1,
+      renderCell: ({ row: { userName } }) => <div>{userName}</div>,
+    },
+    {
+      field: "fullName",
+      headerName: "Full Name",
+      flex: 1,
+      renderCell: ({ row: { fullname } }) => <div>{fullname}</div>,
+    },
+    {
+      field: "roleName",
+      headerName: "Vai Trò",
+      flex: 1,
+      renderCell: ({ row: { roleName } }) => <div>{roleName}</div>,
+    },
+
+    // {
+    //   field: "profileImage",
+    //   headerName: "Hình ảnh",
+    //   flex: 1,
+    //   renderCell: ({ row: { profileImage } }) => <img style={{height:"160px",padding:20}} src={profileImage} />,
+    // },
+    {
+      field: "verifyStatus",
+      headerName: "Tình trạng",
+      flex: 1,
+      renderCell: ({ row: { verifyStatus } }) => (
+        <div
+          style={{
+            color:
+              verifyStatus === "Pending"
+                ? "yellow"
+                : verifyStatus === "Approved"
+                ? "green"
+                : "red",
+          }}
+        >
+          {verifyStatus}
+        </div>
+      ),
+    },
+    {
+      field: "action",
+      headerName: "Hành động",
+      flex: 1,
+      renderCell: ({ row: { id } }) => {
+        return (
+          <Box width="100%" display="flex" justifyContent="center" gap="4px">
+            <Button
+              variant="contained"
+              style={{
+                // backgroundColor:
+                //   status === "Active" ? "#55ab95" : colors.redAccent[600],
+                backgroundColor: "#55ab95",
+                minWidth: "50px",
+                textTransform: "capitalize",
+              }}
+              onClick={() => handleAccept(id)}
+            >
+              Đồng ý
+            </Button>
+            <Button
+              variant="contained"
+              style={{
+                // backgroundColor:
+                //   status === "Active" ? "#55ab95" : colors.redAccent[600],
+                backgroundColor: colors.redAccent[600],
+                minWidth: "50px",
+                textTransform: "capitalize",
+              }}
+              onClick={() => handleDeny(id)}
+            >
+              Từ chối
+            </Button>
+          </Box>
+        );
+      },
+    },
+  ];
+
+  const rows =
+    accounts?.map((account, index) => ({
+      ...account,
+      order: index + 1,
+    })) || [];
+
+  return (
+    <Box m="20px">
+      <Header title="TÀI KHOẢN" subtitle="Quản Lý Tài Khoản Hệ Thống" />
+      {/* <div
+        style={{
+          color: "#3045FF",
+          fontSize: 34,
+          fontWeight: 900,
+          marginLeft: 550,
+          fontFamily: "serif",
+        }}
+      >
+        TÀI KHOẢN
+      </div> */}
+      {/* <div
+        style={{
+          color: "#2a2d64",
+          fontSize: 20,
+          fontWeight: 900,
+          padding: 20,
+        }}
+      >
+        Quản Lý Tài Khoản Hệ Thống
+      </div> */}
+      {/* <FilterComponent
+        label="Vai Trò"
+        name="role"
+        role={role}
+        setRole={setRole}
+      /> */}
+      <Box sx={StyledBox} height="59vh">
+        <DataGrid
+          disableRowSelectionOnClick
+          loading={showLoadingModal}
+          slots={{
+            loadingOverlay: () => <GridLoadingOverlay />,
+            noRowsOverlay: () => <CustomNoRowsOverlay />,
+            pagination: () => (
+              <Pagination
+                data={accounts}
+                pageNumber={pageNumber}
+                pageSize={pageSize}
+                setPageNumber={setPageNumber}
+                setPageSize={setPageSize}
+              />
             ),
-        },
-        {
-            field: "email",
-            headerName: "Email",
-            flex: 1,
-            cellClassName: "name-column--cell",
-            renderCell: ({ row: { id, email } }) => {
-                const handleOpen = () => {
-                    setShowLoadingModal(true);
-                    dispatch(getUserDetailThunk(id)).then(() => {
-                        setShowLoadingModal(false);
-                        setOpen(true);
-                    });
-                };
-                return (
-                    <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-                        {email}
-                    </div>
-                );
-            },
-        },
-        {
-            field: "phoneNumber",
-            headerName: "Số Điện Thoại",
-            flex: 1,
-            renderCell: ({ row: { phoneNumber } }) => (
-                <div>{FormatPhoneNumber(phoneNumber)}</div>
-            ),
-        },
-        {
-            field: "role",
-            headerName: "Vai Trò",
-            flex: 1,
-            renderCell: ({ row: { role } }) => <div>{AccRole(role)}</div>,
-        },
-        {
-            field: "status",
-            headerName: "Tình Trạng",
-            flex: 1,
-            headerAlign: "center",
-            renderCell: ({ row: { id, status } }) => {
-                const handleClick = (event) => {
-                    setPopoverId(id);
-                    setPopoverStatus(status);
-                    setAnchorEl(event.currentTarget);
-                };
-
-                const handleClose = () => {
-                    setAnchorEl(null);
-                };
-
-                const open = Boolean(anchorEl);
-
-                const handleChangeStatus = (id, status) => {
-                    setShowLoadingModal(true);
-                    handleClose();
-                    dispatch(
-                        updateStatusAccountThunk({
-                            id: id,
-                            accountStatus: status,
-                        })
-                    ).then(() => {
-                        if (role !== "all") {
-                            dispatch(
-                                getAllAccountsThunk({
-                                    role: role,
-                                    pageNumber,
-                                    pageSize,
-                                })
-                            ).then(() => {
-                                setShowLoadingModal(false);
-                            });
-                        } else {
-                            dispatch(
-                                getAllAccountsThunk({
-                                    role: "",
-                                    pageNumber,
-                                    pageSize,
-                                })
-                            ).then(() => {
-                                setShowLoadingModal(false);
-                            });
-                        }
-                    });
-                };
-
-                return (
-                    <Box width="100%" display="flex" justifyContent="center">
-                        <Button
-                            variant="contained"
-                            style={{
-                                backgroundColor:
-                                    status === "Active"
-                                        ? "#55ab95"
-                                        : colors.redAccent[600],
-                                minWidth: "97px",
-                                textTransform: "capitalize",
-                            }}
-                            onClick={handleClick}
-                        >
-                            {status === "Active" ? "Hoạt động" : "Vô hiệu"}
-                        </Button>
-                        <Popover
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "right",
-                            }}
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                        >
-                            {popoverStatus === "Active" ? (
-                                <Button
-                                    style={{
-                                        backgroundColor: colors.redAccent[600],
-                                        color: "white",
-                                        minWidth: "97px",
-                                        textTransform: "capitalize",
-                                    }}
-                                    onClick={() =>
-                                        handleChangeStatus(
-                                            popoverId,
-                                            "InActive"
-                                        )
-                                    }
-                                >
-                                    Vô hiệu hóa
-                                </Button>
-                            ) : (
-                                <Button
-                                    style={{
-                                        backgroundColor: "#55ab95",
-                                        color: "white",
-                                        minWidth: "97px",
-                                        textTransform: "capitalize",
-                                    }}
-                                    onClick={() =>
-                                        handleChangeStatus(popoverId, "Active")
-                                    }
-                                >
-                                    kích hoạt
-                                </Button>
-                            )}
-                        </Popover>
-                    </Box>
-                );
-            },
-        },
-    ];
-
-    const rows =
-        accounts?.items?.map((account, index) => ({
-            ...account,
-            order: index + 1,
-        })) || [];
-
-    return (
-        <Box m="20px">
-            {/* <Header title="TÀI KHOẢN" subtitle="Quản Lý Tài Khoản Hệ Thống"  /> */}
-            <div style={{color:"#3045FF", fontSize:34, fontWeight:900, marginLeft:550,fontFamily:'serif'}}>TÀI KHOẢN</div>
-            <div style={{color:"#2a2d64", fontSize:20, fontWeight:900,padding:20}}>Quản Lý Tài Khoản Hệ Thống</div>
-            <FilterComponent
-                label="Vai Trò"
-                name="role"
-                role={role}
-                setRole={setRole}
-                
-            />
-            <Box sx={StyledBox} height="59vh">
-                <DataGrid
-                    disableRowSelectionOnClick
-                    loading={showLoadingModal}
-                    slots={{
-                        loadingOverlay: () => <GridLoadingOverlay />,
-                        noRowsOverlay: () => <CustomNoRowsOverlay />,
-                        pagination: () => (
-                            <Pagination
-                                data={accounts}
-                                pageNumber={pageNumber}
-                                pageSize={pageSize}
-                                setPageNumber={setPageNumber}
-                                setPageSize={setPageSize}
-                            />
-                        ),
-                    }}
-                    rows={rows}
-                    columns={columns}
-                />
-                <AccountBackdrop
+          }}
+          rows={rows}
+          columns={columns}
+        />
+        {/* <AccountBackdrop
                     open={open}
                     handleClose={handleClose}
                     userDetail={userDetail}
-                />
-            </Box>
-        </Box>
-    );
+                /> */}
+        {/* {accounts.email} */}
+      </Box>
+    </Box>
+  );
 }

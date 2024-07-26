@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllAccountsThunk } from "../../apiThunk/userThunk";
+import { getAllUsersThunk } from "../../apiThunk/userThunk";
 
 export const allAccountsSlice = createSlice({
     name: "allAccounts",
@@ -13,17 +13,17 @@ export const allAccountsSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-            .addCase(getAllAccountsThunk.pending, (state) => {
+            .addCase(getAllUsersThunk.pending, (state) => {
                 state.loading = true;
                 state.loading = "loading";
                 state.error = null;
             })
-            .addCase(getAllAccountsThunk.fulfilled, (state, action) => {
+            .addCase(getAllUsersThunk.fulfilled, (state, action) => {
                 state.loading = false;
                 state.loading = "succeeded";
                 state.entities = action.payload;
             })
-            .addCase(getAllAccountsThunk.rejected, (state, action) => {
+            .addCase(getAllUsersThunk.rejected, (state, action) => {
                 state.loading = false;
                 state.loading = "failed";
                 state.error = action.payload;

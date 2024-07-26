@@ -53,8 +53,8 @@ export function FilterComponent(props) {
     };
 
     return (
-        <FormControl style={{ width: "13%", marginBottom: "20px", backgroundColor:"#2a2d64",borderRadius:5}}>
-            <InputLabel id={name} style={{color:'black'}}>
+        <FormControl style={{ width: "13%", marginBottom: "20px" }}>
+           <InputLabel id={name} color="secondary">
                 <span>{label}</span>
             </InputLabel>
             <Select

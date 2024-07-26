@@ -153,7 +153,7 @@ const Sidebar = (props) => {
                                             style={{
                                                 marginLeft: "10px",
                                                 marginRight: "19px",
-                                                color: "black",
+                                                color: "white",
                                             }}
                                         />
                                     )}
@@ -161,7 +161,7 @@ const Sidebar = (props) => {
                                         <ListItemText
                                             primary="Hệ Thống"
                                             style={{
-                                                color: "black",
+                                                color: "white",
                                             }}
                                         />
                                     )}
@@ -169,7 +169,7 @@ const Sidebar = (props) => {
                                         <ExpandLess
                                             style={{
                                                 marginLeft: "10px",
-                                                color: "black",
+                                                color: "white",
                                             }}
                                         />
                                     ) : (

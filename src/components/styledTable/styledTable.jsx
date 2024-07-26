@@ -97,23 +97,21 @@ export const StyledBox = () => {
         //Màu chữ trong bảng
         "& .name-column--cell": {
             color: colors.greenAccent[300],
-            // color: "#3045FF !important"  ,
         },
         // Màu header
         "& .MuiDataGrid-columnHeaders": {                                   
-            backgroundColor: `${colors.blueAccent[800]} !important`,
+            backgroundColor: colors.blueAccent[700],
             borderBottom: "none",
            
         },
         //Màu trong bảng nội dung processing
         "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
-            // color: "#3045FF !important"  ,
         },
         //Màu footer
         "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: `${colors.blueAccent[800]} !important`,
+            backgroundColor: colors.blueAccent[700],
         },
         "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,

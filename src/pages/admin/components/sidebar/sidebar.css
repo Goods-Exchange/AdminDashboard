@@ -2,8 +2,6 @@
     position: sticky;
     top: 0;
     height: 100%;
-
-   
 }
 
 .adminSidebar .box {
@@ -14,20 +12,9 @@
     padding-block: 5px;
     border-radius: 10px;
     margin-left: 10px;
-    background-color: #91a8ad;
-
-    
 }
-.adminSidebar .icon-box{
-   
-    color: #0F0002;
-
-    
-}
-
 .adminSidebar .box:hover {
     background-color: #aaaaaa47;
-    
     cursor: pointer;
 }
 .adminSidebar .selected_box {
@@ -40,7 +27,6 @@
     padding-block: 5px;
     border-radius: 10px;
     margin-left: 10px;
-    
 }
 .adminSidebar .flex-center {
     display: flex;

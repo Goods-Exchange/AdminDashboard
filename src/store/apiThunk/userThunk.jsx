@@ -19,8 +19,10 @@ import {
   updateStatusAccount,
   updateStaffPassword,
   getAllVerifyUsers,
+  getAllUsers,
   approveUser,
   denyUser,
+
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -46,12 +48,26 @@ export const getAllAccountsThunk = createAsyncThunk(
     }
   }
 );
+
+
 // TODO: API getAllVerifyUsers Thunk
 export const getAllVerifyUsersThunk = createAsyncThunk(
   "users/getAllVerifyUsers",
   async (thunkAPI) => {
     try {
       const response = await getAllVerifyUsers();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+// TODO: API getAllUsers Thunk
+export const getAllUsersThunk = createAsyncThunk(
+  "users/getAllVerifyUsers",
+  async (thunkAPI) => {
+    try {
+      const response = await getAllUsers();
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

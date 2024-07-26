@@ -6,6 +6,7 @@ import {
     getPackages,
     updatePackage,
     getPackageDetail,
+    getAllSubscription
 } from "../../api/package";
 
 export const getPackageDetailThunk = createAsyncThunk(
@@ -55,12 +56,25 @@ export const deletePackageThunk = createAsyncThunk(
         }
     }
 );
-
+//GetAllSubscription
 export const getPackagesThunk = createAsyncThunk(
     "package/getPackages",
     async (thunkAPI) => {
         try {
             const response = await getPackages();
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
+//GetAllSubscription
+export const getAllSubscriptionThunk = createAsyncThunk(
+    "package/getPackages",
+    async (thunkAPI) => {
+        try {
+            const response = await getAllSubscription();
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);

@@ -1,7 +1,11 @@
 import api from "./api";
 
 export const getPackages = async () => {
-    const response = await api.get(`/api/v1/packages`);
+    const response = await api.get(`/api/v1/Subcription/GetAllSubscription`);
+    return response.data;
+};
+export const getAllSubscription = async () => {
+    const response = await api.get(`/api/v1/Subcription/GetAllSubscription`);
     return response.data;
 };
 
