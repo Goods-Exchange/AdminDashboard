@@ -19,9 +19,9 @@ export const getShopReportsThunk = createAsyncThunk(
 
 export const getAllReportsThunk = createAsyncThunk(
     "report/getAllReports",
-    async ({ pageNumber, pageSize }, thunkAPI) => {
+    async (thunkAPI) => {
         try {
-            const response = await getAllReports(pageNumber, pageSize);
+            const response = await getAllReports();
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);

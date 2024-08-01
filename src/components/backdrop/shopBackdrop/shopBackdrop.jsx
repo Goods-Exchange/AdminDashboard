@@ -53,11 +53,11 @@ export function ShopBackdrop(props) {
                     </div>
                     <div className="flex-column">
                         <div className="field">
-                            <span className="span">Thời Gian Còn Lại: </span>
+                            <span className="span">Loại: </span>
                             {FormatTimeDifference(shopDetail.endTimePackage)}
                         </div>
                         <div className="field">
-                            <span className="span">Tên Cửa Hàng: </span>
+                            <span className="span">Tên Post: </span>
                             {shopDetail.name}
                         </div>
                         <div className="field">
@@ -73,37 +73,22 @@ export function ShopBackdrop(props) {
                             {shopDetail.location}
                         </div>
                         <div className="field">
-                            <span className="span">Loại Cửa Hàng: </span>
+                            <span className="span">Loại Post: </span>
                             {PetType(shopDetail.type)}
                         </div>
                         <div className="field">
-                            <span className="span">Giờ Mở Cửa: </span>
+                            <span className="span">Ngày tạo </span>
                             {FormatTime(shopDetail.startTime) || ""}
                         </div>
                         <div className="field">
-                            <span className="span">Giờ Đóng Cửa: </span>
+                            <span className="span">Ngày hết hạn: </span>
                             {FormatTime(shopDetail.endTime) || ""}
                         </div>
                         <div className="field">
-                            <span className="span">Mã Số Thuế: </span>
+                            <span className="span">Id: </span>
                             {shopDetail.taxCode}
                         </div>
-                        <div className="field">
-                            <span className="span">Số Người Theo Dõi: </span>
-                            {shopDetail.totalFollow}
-                        </div>
-                        <div className="field">
-                            <span className="span">Facebook: </span>
-                            {shopDetail.fbUrl}
-                        </div>
-                        <div className="field">
-                            <span className="span">Instagram: </span>
-                            {shopDetail.instagramUrl}
-                        </div>
-                        <div className="field">
-                            <span className="span">Trang Chủ: </span>
-                            {shopDetail.websiteUrl}
-                        </div>
+                
                     </div>
                 </div>
             </Box>

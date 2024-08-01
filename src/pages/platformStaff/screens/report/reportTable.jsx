@@ -58,8 +58,7 @@ export default function ReportTable() {
         setShowLoadingModal(true);
         dispatch(
             getAllReportsThunk({
-                pageNumber,
-                pageSize,
+               
             })
         ).then(() => setShowLoadingModal(false));
     }, [pageNumber, pageSize]);
@@ -119,13 +118,13 @@ export default function ReportTable() {
             ),
         },
         {
-            field: "postID",
-            headerName: "ID Bài Viết",
+            field: "reportPostId",
+            headerName: "ID Bài Report",
             headerAlign: "center",
-            renderCell: ({ row: { postID } }) => {
+            renderCell: ({ row: { reportPostId } }) => {
                 const handleOpen = () => {
                     setShowLoadingModal(true);
-                    dispatch(getPostDetailThunk(postID)).then(() => {
+                    dispatch(getPostDetailThunk(reportPostId)).then(() => {
                         setShowLoadingModal(false);
                         setOpen(true);
                     });
@@ -231,8 +230,7 @@ export default function ReportTable() {
                     ).then(() =>
                         dispatch(
                             getAllReportsThunk({
-                                pageNumber,
-                                pageSize,
+                              
                             })
                         ).then(() => setShowLoadingModal(false))
                     );
@@ -337,8 +335,7 @@ export default function ReportTable() {
                 }}
             >
                 {/* <Header title="BÁO CÁO" subtitle="Quản Lý Báo Cáo" /> */}
-                <div style={{color:"#3045FF", fontSize:34, fontWeight:900, marginLeft:550,fontFamily:'serif'}}>REPORT</div>
-                <div style={{color:"#2a2d64", fontSize:20, fontWeight:900,padding:20}}>Quản Lý Báo Cáo</div>
+                
             </div>
             <Box height="68vh" sx={StyledBox}>
                 <DataGrid

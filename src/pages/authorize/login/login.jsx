@@ -153,25 +153,25 @@ export default function Login() {
                     });
                   // });
                   break;
-                // case "PlatformStaff":
-                //   dispatch(getAllNotificationsThunk());
-                //   dispatch(getUnreadNotificationsThunk()).then(() => {
-                //     setShowLoadingModal(false);
-                //     Swal.fire({
-                //       title: SUCCESSTEXT,
-                //       text: LOGINSUCCESS,
-                //       icon: "success",
-                //       showCancelButton: false,
-                //       showConfirmButton: false,
-                //       background: "white",
-                //       timer: 1500,
-                //       timerProgressBar: true,
-                //       scrollbarPadding: false,
-                //     }).then(() => {
-                //       navigate("/staff");
-                //     });
-                //   });
-                //   break;
+                case "Moderator":
+                  dispatch(getAllNotificationsThunk());
+                  dispatch(getUnreadNotificationsThunk()).then(() => {
+                    setShowLoadingModal(false);
+                    Swal.fire({
+                      title: SUCCESSTEXT,
+                      text: LOGINSUCCESS,
+                      icon: "success",
+                      showCancelButton: false,
+                      showConfirmButton: false,
+                      background: "white",
+                      timer: 1500,
+                      timerProgressBar: true,
+                      scrollbarPadding: false,
+                    }).then(() => {
+                      navigate("/staff");
+                    });
+                  });
+                  break;
                 // case "Staff":
                 //   localStorage.clear();
                 //   setShowLoadingModal(false);
@@ -418,7 +418,7 @@ console.log(getUserDataThunk);
                     <LoadingModal />
                   )}
 
-                  <p className="login__link">
+                  {/* <p className="login__link">
                     Không có tài khoản?
                     <Link
                       to="/signup"
@@ -434,7 +434,7 @@ console.log(getUserDataThunk);
                         Đăng ký ngay!
                       </span>
                     </Link>
-                  </p>
+                  </p> */}
                 </form>
                 <div className="login__google">
                   <div className="login__flex">

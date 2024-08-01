@@ -163,7 +163,7 @@ const Sidebar = (props) => {
                                     }}
                                 >
                                     <Item
-                                        title="Cửa Hàng"
+                                        title="Quản lý POTS"
                                         to=""
                                         icon={<HomeOutlinedIcon />}
                                         selected={selected}

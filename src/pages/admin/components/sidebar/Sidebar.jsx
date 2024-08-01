@@ -204,7 +204,7 @@ const Sidebar = (props) => {
                                         setSelected={setSelected}
                                     />
                                     <Item
-                                        title="Ví Và Giao Dịch"
+                                        title="Giao Dịch"
                                         to="wallet"
                                         icon={<WalletOutlinedIcon />}
                                         selected={selected}

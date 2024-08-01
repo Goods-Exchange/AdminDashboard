@@ -21,9 +21,9 @@ export const getAllShopsDistance = async (latitude, longitude) => {
     return response.data;
 };
 
-export const getAllPetCoffeeShops = async (type, pageNumber, pageSize) => {
+export const getAllPetCoffeeShops = async (pageIndex, pageSize) => {
     const response = await api.get(
-        `/api/v1/petcoffeeshops?ShopType=${type}&PageNumber=${pageNumber}&PageSize=${pageSize}`
+        `/api/v1/Post/GetAllPost?PageNumber=${pageIndex}&PageSize=${pageSize}`
     );
     return response.data;
 };

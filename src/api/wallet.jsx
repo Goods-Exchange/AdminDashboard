@@ -1,7 +1,7 @@
 import api from "./api";
 
 export const getWallet = async () => {
-    const response = await api.get(`/api/v1/account/wallet`);
+    const response = await api.get(`/api/v1/WalletTransaction/TransactionList`);
     return response.data;
 };
 

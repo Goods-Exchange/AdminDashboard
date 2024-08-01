@@ -1,325 +1,297 @@
-import { Box, Button, useTheme } from "@mui/material";
+import { Box, Button, Popover, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../../theme";
 import Header from "../../components/header/Header";
 import { useDispatch, useSelector } from "react-redux";
+import Coin from "../../../../assets/coinvnd.png";
 import {
-    transactionDetailSelector,
-    userDataSelector,
-    walletSelector,
+  allAccountsSelector,
+  // userDetailSelector,
+  allVerifyUsersSelector,
 } from "../../../../store/sellectors";
-import "./walletTable.css";
-import { useEffect } from "react";
-import { getWalletThunk } from "../../../../store/apiThunk/walletThunk";
-import { getTransationDetailThunk } from "../../../../store/apiThunk/transactionThunk";
-import { useState } from "react";
-import Coin from "../../../../assets/coin.png";
-import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
-import Lottie from "lottie-react";
-import LoadingModal from "../../../../assets/loading.json";
+import {
+    allPetCoffeeShopsSelector,
+    walletSelector,
+    petCoffeeShopDetailSelector,
+    postSelector,
+  } from "../../../../store/sellectors";
+import {
+  getAllVerifyUsersThunk,
+  getAllAccountsThunk,
+  getUserDetailThunk,
+  updateStatusAccountThunk,
+  getAllUsersThunk,
+  approveUserThunk,
+  denyUserThunk,
+  banUserThunk,
+  unbanUserThunk
+} from "../../../../store/apiThunk/userThunk";
+import {getWalletThunk } from "../../../../store/apiThunk/walletThunk";
+import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination/pagination";
-import { formatPaginationData } from "../../../../components/format/formatPagination/formatPagination";
+import { AccRole } from "../../../../components/mapping/mapping";
 import {
-    StyledBox,
-    CustomNoRowsOverlay,
-    GridLoadingOverlay,
+  StyledBox,
+  CustomNoRowsOverlay,
+  GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-import {
-    AccRole,
-    TransactionStatus,
-    TransactionType,
-} from "../../../../components/mapping/mapping";
-import { FormatDateTime } from "../../../../components/format/formatDatetime/formatDatetime";
-import { FormatAmount } from "../../../../components/format/formatAmount/formatAmount";
-import { TransactionBackdrop } from "../../../../components/backdrop/transactionBackdrop/transactionBackdrop";
-import { useLocation } from "react-router-dom";
+import { FilterComponent } from "../../../../components/filter/filterComponent";
+import { FormatPhoneNumber } from "../../../../components/format/formatText/formatText";
+import { AccountBackdrop } from "../../../../components/backdrop/accountBackdrop/accountBackdrop";
+import Swal from "sweetalert2";
 
-export default function WalletTableAdmin() {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    const url = new URL(window.location.href);
-    const render = url.searchParams.get("render");
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const transactionId = location?.state?.transactionId;
-    const openNoti = location?.state?.openNoti;
-    const userData = useSelector(userDataSelector);
-    const wallet = useSelector(walletSelector);
-    const transactionDetail = useSelector(transactionDetailSelector);
-    const [transData, setTransData] = useState([]);
-    const [showLoadingModal, setShowLoadingModal] = useState(false);
-    const [showLoadingTrans, setShowLoadingTrans] = useState(false);
-    const [open, setOpen] = useState(false);
-    const [type, setType] = useState("all");
-    const [pageSize, setPageSize] = useState(10);
-    const [pageNumber, setPageNumber] = useState(1);
+export default function WalletTable() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const accounts = useSelector(walletSelector);
+  const dispatch = useDispatch();
+  const [showLoadingModal, setShowLoadingModal] = useState(false);
+  const [pageSize, setPageSize] = useState(10);
+  const [pageNumber, setPageNumber] = useState(1);
+  console.log(accounts);
+  useEffect(() => {
+    dispatch(getWalletThunk());
+  }, []);
 
-    const trans = formatPaginationData(transData, pageNumber, pageSize);
+  // const handleAccept = (id) => {
+  //   setShowLoadingModal(true);
+  //   dispatch(approveUserThunk(id)).then(() => {
+  //     dispatch(getAllVerifyUsersThunk()).then(setShowLoadingModal(false));
+  //   });
+  // };
+  const handleAccept = (id) => {
+    setShowLoadingModal(true);
+    dispatch(banUserThunk(id))
+      .then(() => {
+        dispatch(getAllUsersThunk()).then(() => {
+          setShowLoadingModal(false);
+          Swal.fire({
+            title: "Success!",
+            text: "User has been approved.",
+            icon: "success",
+          });
+        });
+      })
+      .catch((error) => {
+        setShowLoadingModal(false);
+        Swal.fire({
+          title: "Error!",
+          text: "There was an issue approving the user.",
+          icon: "error",
+        });
+      });
+  };
 
-    useEffect(() => {
+  const handleDeny = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
         setShowLoadingModal(true);
-        dispatch(getWalletThunk())
-            .unwrap()
-            .then((res) => {
-                setTransData(res.transactions);
-                setShowLoadingModal(false);
+        dispatch(unbanUserThunk(id)).then(() => {
+          dispatch(getAllUsersThunk()).then(() => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            }).then(() => {
+              setShowLoadingModal(false);
             });
-    }, []);
+          });
+        });
+      }
+    });
+  };
 
-    useEffect(() => {
-        if (type === "all") {
-            setTransData(wallet?.transactions);
-        } else {
-            setTransData(
-                wallet?.transactions?.filter(
-                    (data) => data.transactionType === type
-                )
-            );
-        }
-    }, [type]);
-
-    useEffect(() => {
-        const removeRenderQueryParameter = () => {
-            const url = new URL(window.location.href);
-            url.searchParams.delete("render");
-            window.history.replaceState({}, "", url);
+  const columns = [
+    {
+      field: "order",
+      headerName: "STT",
+      headerAlign: "center",
+      renderCell: ({ row: { order } }) => (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+        >
+          {order}
+        </Box>
+      ),
+    },
+    {
+        field: "id",
+        headerName: "ID Giao dịch",
+        flex: 1,
+        renderCell: ({ row: { id } }) => <div>{id}</div>,
+      },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+      cellClassName: "name-column--cell",
+      renderCell: ({ row: { id, email } }) => {
+        const handleOpen = () => {
+          setShowLoadingModal(true);
+          dispatch(getWalletThunk(id)).then(() => {
+            setShowLoadingModal(false);
+            setOpen(true);
+          });
         };
+        return (
+          <div onClick={handleOpen} style={{ cursor: "pointer" }}>
+            {email}
+          </div>
+        );
+      },
+    },
+    {
+      field: "username",
+      headerName: "User Name",
+      flex: 1,
+      renderCell: ({ row: { username } }) => <div>{username}</div>,
+    },
+    {
+        field: "action",
+        headerName: "Hành động",
+        flex: 1,
+        renderCell: ({ row: { action } }) => <div>{action}</div>,
+      },
+      {
+        field: "amount",
+        flex: 1,
+        headerAlign: "center",
+        headerName: "Số tiền nạp",
+        renderCell: ({ row: { amount } }) => (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
+            gap="6px"
+          >
+            {amount}
+            <img src={Coin} alt="" style={{ width: "35px" }} />
+          </Box>
+        ),
+      },
+  
 
-        if (transactionId && openNoti) {
-            setShowLoadingTrans(true);
-            dispatch(getTransationDetailThunk(transactionId)).then(() => {
-                removeRenderQueryParameter();
-                setShowLoadingTrans(false);
-                setOpen(openNoti);
-            });
-        }
-    }, [openNoti, transactionId, render]);
+    // {
+    //   field: "profileImage",
+    //   headerName: "Hình ảnh",
+    //   flex: 1,
+    //   renderCell: ({ row: { profileImage } }) => <img style={{height:"160px",padding:20}} src={profileImage} />,
+    // },
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    // {
+    //   field: "action",
+    //   headerName: "Hành động",
+    //   flex: 1,
+    //   renderCell: ({ row: { id } }) => {
+    //     return (
+    //       <Box width="100%" display="flex" justifyContent="center" gap="4px">
+    //         <Button
+    //           variant="contained"
+    //           style={{
+    //             // backgroundColor:
+    //             //   status === "Active" ? "#55ab95" : colors.redAccent[600],
+    //             backgroundColor: "#55ab95",
+    //             minWidth: "50px",
+    //             textTransform: "capitalize",
+    //           }}
+    //           onClick={() => handleAccept(id)}
+    //         >
+    //           Chặn
+    //         </Button>
+    //         <Button
+    //           variant="contained"
+    //           style={{
+    //             // backgroundColor:
+    //             //   status === "Active" ? "#55ab95" : colors.redAccent[600],
+    //             backgroundColor: colors.redAccent[600],
+    //             minWidth: "50px",
+    //             textTransform: "capitalize",
+    //           }}
+    //           onClick={() => handleDeny(id)}
+    //         >
+    //           Hủy chặn
+    //         </Button>
+    //       </Box>
+    //     );
+    //   },
+    // },
+  ];
 
-    const columns = [
-        {
-            field: "order",
-            headerName: "STT",
-            headerAlign: "center",
-            renderCell: ({ row: { order } }) => (
-                <Box
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    width="100%"
-                >
-                    {order}
-                </Box>
+  const rows =
+    accounts?.map((account, index) => ({
+      ...account,
+      order: index + 1,
+    })) || [];
+
+  return (
+    <Box m="20px">
+      <Header title="TÀI KHOẢN" subtitle="Quản Lý Tài Khoản Hệ Thống" />
+      {/* <div
+        style={{
+          color: "#3045FF",
+          fontSize: 34,
+          fontWeight: 900,
+          marginLeft: 550,
+          fontFamily: "serif",
+        }}
+      >
+        TÀI KHOẢN
+      </div> */}
+      {/* <div
+        style={{
+          color: "#2a2d64",
+          fontSize: 20,
+          fontWeight: 900,
+          padding: 20,
+        }}
+      >
+        Quản Lý Tài Khoản Hệ Thống
+      </div> */}
+      {/* <FilterComponent
+        label="Vai Trò"
+        name="role"
+        role={role}
+        setRole={setRole}
+      /> */}
+      <Box sx={StyledBox} height="59vh">
+        <DataGrid
+          disableRowSelectionOnClick
+          loading={showLoadingModal}
+          slots={{
+            loadingOverlay: () => <GridLoadingOverlay />,
+            noRowsOverlay: () => <CustomNoRowsOverlay />,
+            pagination: () => (
+              <Pagination
+                data={accounts}
+                pageNumber={pageNumber}
+                pageSize={pageSize}
+                setPageNumber={setPageNumber}
+                setPageSize={setPageSize}
+              />
             ),
-        },
-        {
-            field: "id",
-            headerName: "ID Giao Dịch",
-            headerAlign: "center",
-            renderCell: ({ row: { id } }) => {
-                const handleOpen = () => {
-                    setShowLoadingTrans(true);
-                    dispatch(getTransationDetailThunk(id)).then(() => {
-                        setShowLoadingTrans(false);
-                        setOpen(true);
-                    });
-                };
-
-                return (
-                    <Box
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        width="100%"
-                    >
-                        <Button variant="contained" onClick={handleOpen}>
-                            {id}
-                        </Button>
-                    </Box>
-                );
-            },
-        },
-        {
-            field: "creatorFullName",
-            headerName: "Người Giao Dịch",
-            flex: 1,
-            valueGetter: (params) => params.row.creator?.fullName || "",
-            cellClassName: "name-column--cell",
-        },
-        {
-            field: "creatorRole",
-            headerName: "Vai Trò",
-            flex: 1,
-            valueGetter: (params) => AccRole(params.row.creator?.role) || "",
-        },
-        // {
-        //     field: "shopName",
-        //     headerName: "Cửa Hàng",
-        //     flex: 1,
-        //     valueGetter: (params) => params.row.shop?.name || "",
-        // },
-        {
-            field: "createdAt",
-            headerName: "Ngày Giao Dịch",
-            flex: 1,
-            renderCell: ({ row: { createdAt } }) => (
-                <div>{FormatDateTime(createdAt)}</div>
-            ),
-        },
-        {
-            field: "amount",
-            headerName: "Số Tiền",
-            flex: 1,
-            renderCell: ({ row: { amount, id } }) => {
-                return (
-                    <Box
-                        display="flex"
-                        alignItems="center"
-                        width="100%"
-                        gap="5px"
-                    >
-                        {FormatAmount(
-                            amount?.toLocaleString(),
-                            id,
-                            wallet,
-                            userData
-                        )}
-                        <img src={Coin} alt="" style={{ width: "30px" }} />
-                    </Box>
-                );
-            },
-        },
-        {
-            field: "transactionType",
-            headerName: "Loại Giao Dịch",
-            flex: 1,
-            renderCell: ({ row: { transactionType } }) => (
-                <div>{TransactionType(transactionType)}</div>
-            ),
-        },
-        {
-            field: "content",
-            headerName: "Mô Tả",
-            flex: 1,
-        },
-        {
-            field: "transactionStatus",
-            headerName: "Tình Trạng",
-            flex: 1,
-            headerAlign: "center",
-            renderCell: ({ row: { transactionStatus } }) => {
-                return (
-                    <Box width="100%" display="flex" justifyContent="center">
-                        <div
-                            style={{
-                                backgroundColor:
-                                    transactionStatus === "Done" ||
-                                    transactionStatus === "Return"
-                                        ? "#55ab95"
-                                        : transactionStatus === "Processing"
-                                        ? "#b8b800"
-                                        : colors.redAccent[600],
-                                minWidth: "97px",
-                                padding: "6px 16px",
-                                borderRadius: "4px",
-                                textTransform: "capitalize",
-                                lineHeight: "1.75",
-                                fontSize: "0.75rem",
-                                textAlign: "center",
-                            }}
-                        >
-                            {TransactionStatus(transactionStatus)}
-                        </div>
-                    </Box>
-                );
-            },
-        },
-    ];
-
-    const rows =
-        trans?.items?.map((transaction, index) => ({
-            ...transaction,
-            order: index + 1,
-        })) || [];
-
-    return (
-        <div className="walletTableAdmin">
-            <Box m="20px">
-                {/* <Header
-                    title="Ví tiền hệ thống"
-                    subtitle="Quản Lý Nguồn Tiền hệ thống"
+          }}
+          rows={rows}
+          columns={columns}
+        />
+        {/* <AccountBackdrop
+                    open={open}
+                    handleClose={handleClose}
+                    userDetail={userDetail}
                 /> */}
-                 <div style={{color:"#3045FF", fontSize:34, fontWeight:900, marginLeft:550,fontFamily:'serif'}}>Wallet</div>
-                 <div style={{color:"#2a2d64", fontSize:20, fontWeight:900,padding:20}}>Quản Lý Nguồn Tiền hệ thống</div>
-                <div className="box">
-                    <div className="content">
-                        <WalletOutlinedIcon
-                            color="secondary"
-                            style={{ fontSize: "60px" }}
-                        />
-                        <div className="balance_box">
-                            <span style={{ fontSize: "20px" }}>
-                                Số Dư Chính
-                            </span>
-                            <div className="balance">
-                                {!showLoadingModal ? (
-                                    Math.floor(
-                                        wallet?.balance
-                                    )?.toLocaleString()
-                                ) : (
-                                    <Lottie
-                                        animationData={LoadingModal}
-                                        loop={true}
-                                        style={{ width: 122, height: 55 }}
-                                    />
-                                )}
-                                {/* <img
-                                    src={Coin}
-                                    alt=""
-                                    style={{ width: "50px" }}
-                                /> */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style={{ marginBottom: "140px" }}>
-                    <Box height="68vh" sx={StyledBox}>
-                        {/* <Header
-                            title="GIAO DỊCH"
-                            subtitle="Lịch Sử Giao Dịch Gần Đây"
-                        /> */}
-                         <div style={{color:"#3045FF", fontSize:34, fontWeight:900, marginLeft:490,fontFamily:'serif'}}>Transaction history</div>
-                         <div style={{color:"#2a2d64", fontSize:20, fontWeight:900,padding:20}}>Lịch Sử Giao Dịch Gần Đây</div>
-                        <DataGrid
-                            loading={showLoadingModal || showLoadingTrans}
-                            slots={{
-                                loadingOverlay: () => <GridLoadingOverlay />,
-                                noRowsOverlay: () => <CustomNoRowsOverlay />,
-                                pagination: () => (
-                                    <Pagination
-                                        data={trans}
-                                        pageNumber={pageNumber}
-                                        pageSize={pageSize}
-                                        setPageNumber={setPageNumber}
-                                        setPageSize={setPageSize}
-                                    />
-                                ),
-                            }}
-                            disableRowSelectionOnClick
-                            rows={rows}
-                            columns={columns}
-                        />
-                        <TransactionBackdrop
-                            open={open}
-                            handleClose={handleClose}
-                            transactionDetail={transactionDetail}
-                        />
-                    </Box>
-                </div>
-            </Box>
-        </div>
-    );
+        {/* {accounts.email} */}
+      </Box>
+    </Box>
+  );
 }

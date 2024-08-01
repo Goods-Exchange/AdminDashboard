@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPostNewsFeedThunk } from "../../apiThunk/postThunk";
+import { getPostThunk } from "../../apiThunk/postThunk";
 
 export const postSlice = createSlice({
     name: "post",
@@ -13,17 +13,17 @@ export const postSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-            .addCase(getPostNewsFeedThunk.pending, (state) => {
+            .addCase(getPostThunk.pending, (state) => {
                 state.loading = true;
                 state.loading = "loading";
                 state.error = null;
             })
-            .addCase(getPostNewsFeedThunk.fulfilled, (state, action) => {
+            .addCase(getPostThunk.fulfilled, (state, action) => {
                 state.loading = false;
                 state.loading = "succeeded";
                 state.entities = action.payload;
             })
-            .addCase(getPostNewsFeedThunk.rejected, (state, action) => {
+            .addCase(getPostThunk.rejected, (state, action) => {
                 state.loading = false;
                 state.loading = "failed";
                 state.error = action.payload;
