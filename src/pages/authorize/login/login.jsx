@@ -339,7 +339,7 @@ console.log(getUserDataThunk);
               <Grid item xs={5} className="flex-center">
               <img src={GoodExLogo} className="body_login_img" alt="" />
             </Grid>
-                <h3 className="login__title">đăng nhập</h3>
+                <h3 className="login__title">Login</h3>
                 <form onSubmit={formik.handleSubmit}>
                   <TextField
                     id="email"
@@ -367,7 +367,7 @@ console.log(getUserDataThunk);
                     id="password"
                     label={
                       <span>
-                        Mật Khẩu <span style={{ color: "red" }}>*</span>
+                        Password<span style={{ color: "red" }}>*</span>
                       </span>
                     }
                     variant="outlined"
@@ -416,7 +416,7 @@ console.log(getUserDataThunk);
                       type="submit"
                       fullWidth
                     >
-                      Đăng nhập
+                      Login
                     </Button>
                   ) : (
                     <LoadingModal />

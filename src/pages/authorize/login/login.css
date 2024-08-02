@@ -4,8 +4,8 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,6 +22,7 @@
     align-items: center;
     text-align: center;
     backdrop-filter: blur(5px); /* Hiệu ứng làm mờ nền phía sau */
+    box-shadow: 0 0 10px 5px rgba(30, 30, 29, 0.7);
 }
 
 .login .flex-center {
@@ -35,6 +36,8 @@
     text-align: center;
     text-transform: uppercase;
     color: #00caff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
 }
 
 .login .login__view__password__btn {
@@ -70,7 +73,7 @@
   }
   
   .login .login__btn:hover {
-    background-color: #419781;
+    background-color: #32508E;
     animation: shake 0.5s;
   }
 
@@ -130,4 +133,8 @@
 .login .body_login_img {
     max-width: 200%;
     height: auto;
+    border-radius: 8px; /* Tùy chọn, để tạo hiệu ứng viền bo tròn nếu cần */
+    transition: box-shadow 0.3s ease-in-out;
+    
 }
+
