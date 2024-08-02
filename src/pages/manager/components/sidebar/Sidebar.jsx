@@ -87,9 +87,7 @@ const Sidebar = (props) => {
                     collapsed={isCollapsed}
                     style={{
                         zIndex: 1,
-                       
                     }}
-                  
                 >
                     <Menu iconShape="square">
                         <MenuItem

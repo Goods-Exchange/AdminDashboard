@@ -1,6 +1,6 @@
 import api from "./api";
 
-export const getAllReports = async (pageNumber, pageSize) => {
+export const getAllReports = async () => {
   const response = await api.get(`/api/v1/VerifyReport/GetAllReports`);
   return response.data;
 };
