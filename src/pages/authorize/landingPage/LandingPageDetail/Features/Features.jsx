@@ -12,32 +12,39 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import DevicesRoundedIcon from '@mui/icons-material/DevicesRounded';
 import EdgesensorHighRoundedIcon from '@mui/icons-material/EdgesensorHighRounded';
 import ViewQuiltRoundedIcon from '@mui/icons-material/ViewQuiltRounded';
-
-
+import mobileIntegrationImage from '../../../../../assets/bodyFeature2.png'; // Replace with actual path
+import dashboardImage from '../../../../../assets/bodyFeature1.jpg'; // Replace with actual path
+import platformsImage from '../../../../../assets/bodyFeature3.png'; // Replace with actual path
 const items = [
   {
     icon: <ViewQuiltRoundedIcon />,
     title: 'Dashboard',
     description:
       'This item could provide a snapshot of the most important metrics or data points related to the product.',
-    imageLight: 'url("https://assets.materialup.com/uploads/a6d53b53-9e7b-4206-9ae8-5340f4c7d22b/preview.jpg")',
-    imageDark: 'url("https://assets.materialup.com/uploads/a6d53b53-9e7b-4206-9ae8-5340f4c7d22b/preview.jpg")',
+      imageLight: `url(${dashboardImage})`,
+      imageDark: `url(${dashboardImage})`,
+    // imageLight: 'url("https://assets.materialup.com/uploads/a6d53b53-9e7b-4206-9ae8-5340f4c7d22b/preview.jpg")',
+    // imageDark: 'url("https://assets.materialup.com/uploads/a6d53b53-9e7b-4206-9ae8-5340f4c7d22b/preview.jpg")',
   },
   {
     icon: <EdgesensorHighRoundedIcon />,
     title: 'Mobile integration',
     description:
       'This item could provide information about the mobile app version of the product.',
-    imageLight: 'url("https://is3-ssl.mzstatic.com/image/thumb/Purple123/v4/dd/39/13/dd3913a3-04d4-dba1-7331-4fb23a13c93e/pr_source.jpg/750x750bb.jpeg")',
-    imageDark: 'url("https://is3-ssl.mzstatic.com/image/thumb/Purple123/v4/dd/39/13/dd3913a3-04d4-dba1-7331-4fb23a13c93e/pr_source.jpg/750x750bb.jpeg")',
+      imageLight: `url(${mobileIntegrationImage})`,
+      imageDark: `url(${mobileIntegrationImage})`,
+    // imageLight: 'url("https://is3-ssl.mzstatic.com/image/thumb/Purple123/v4/dd/39/13/dd3913a3-04d4-dba1-7331-4fb23a13c93e/pr_source.jpg/750x750bb.jpeg")',
+    // imageDark: 'url("https://is3-ssl.mzstatic.com/image/thumb/Purple123/v4/dd/39/13/dd3913a3-04d4-dba1-7331-4fb23a13c93e/pr_source.jpg/750x750bb.jpeg")',
   },
   {
     icon: <DevicesRoundedIcon />,
     title: 'Available on all platforms',
     description:
       'This item could let users know the product is available on all platforms, such as web, mobile, and desktop.',
-    imageLight: 'url("/static/images/templates/templates-images/devices-light.png")',
-    imageDark: 'url("/static/images/templates/templates-images/devices-dark.png")',
+      imageLight: `url(${platformsImage})`,
+    imageDark: `url(${platformsImage})`,
+    // imageLight: 'url("/static/images/templates/templates-images/devices-light.png")',
+    // imageDark: 'url("/static/images/templates/templates-images/devices-dark.png")',
   },
 ];
 
@@ -104,17 +111,17 @@ export default function Features() {
             }}
           >
             <Box
-            className="edit-img"
+              className="edit-img"
               sx={{
-                backgroundSize:'contain',
+                backgroundSize: 'contain', // Use 'contain' to ensure the whole image is visible
                 backgroundPosition: 'center',
                 backgroundImage: (theme) =>
                   theme.palette.mode === 'light'
                     ? items[selectedItemIndex].imageLight
                     : items[selectedItemIndex].imageDark,
-             
+                backgroundRepeat: 'no-repeat', // Ensure no repeat
                 minHeight: 280,
-              
+                width: '100%', // Ensure it takes full width
               }}
             />
             <Box sx={{ px: 2, pb: 2 }}>
@@ -259,13 +266,15 @@ export default function Features() {
             <Box
               sx={{
                 m: 'auto',
-                width: 420,
-                height: 500,
-                backgroundSize: 'contain',
+                width: '100%', // Ensure it takes full width
+                height: '100%', // Ensure it takes full height
+                backgroundSize: 'contain', // Adjust size to fit container
                 backgroundImage: (theme) =>
                   theme.palette.mode === 'light'
                     ? items[selectedItemIndex].imageLight
                     : items[selectedItemIndex].imageDark,
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat', // Ensure no repeat
               }}
             />
           </Card>

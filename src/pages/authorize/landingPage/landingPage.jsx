@@ -102,16 +102,16 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
-import AppAppBar from '../landingPage/LandingPageDetail/AppAppBar';
-import Hero from '../landingPage/LandingPageDetail/Hero';
+import AppAppBar from '../landingPage/LandingPageDetail/AppAppBar/AppAppBar';
+import Hero from '../landingPage/LandingPageDetail/Hero/Hero';
 
-import LogoCollection from '../landingPage/LandingPageDetail/LogoCollection';
-import Highlights from '../landingPage/LandingPageDetail/Highlights';
-import Pricing from '../landingPage/LandingPageDetail/Pricing';
-import Features from '../landingPage/LandingPageDetail/Features';
-import Testimonials from '../landingPage/LandingPageDetail/Testimonials';
-import FAQ from '../landingPage/LandingPageDetail/FAQ';
-import Footer from '../landingPage/LandingPageDetail/Footer';
+import LogoCollection from '../landingPage/LandingPageDetail/LogoCollection/LogoCollection';
+import Highlights from '../landingPage/LandingPageDetail/Highlights/Highlights';
+import Pricing from '../landingPage/LandingPageDetail/Pricing/Pricing';
+import Features from '../landingPage/LandingPageDetail/Features/Features';
+import Testimonials from '../landingPage/LandingPageDetail/Testimonials/Testimonials';
+import FAQ from '../landingPage/LandingPageDetail/FAQ/FAQ';
+import Footer from '../landingPage/LandingPageDetail/Footer/Footer';
 // import CarouselProducts from '../landingPage/LandingPageDetail/CarouselProduct';
 import getLPTheme from './getLPTheme';
 

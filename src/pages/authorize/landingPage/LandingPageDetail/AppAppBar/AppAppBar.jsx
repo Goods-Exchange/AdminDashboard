@@ -11,8 +11,8 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
-import ToggleColorMode from './ToggleColorMode';
-import logo from '../../../../assets/logoGX.png';
+import ToggleColorMode from '../ToggleColorMode/ToggleColorMode';
+import logo from '../../../../../assets/logoGX.png';
 
 
 import { Link, useNavigate } from "react-router-dom";
@@ -164,7 +164,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 onClick={() => navigate("/login")}
                 target="_blank"
               >
-                Login
+                Free Download
               </Button>
             </Box>
             <Box sx={{ display: { sm: '', md: 'none' } }}>
