@@ -21,16 +21,14 @@ import { eventDetailForCustomerSlice } from "./features/event.slice/eventDetailF
 import { joinEventsSlice } from "./features/event.slice/joinEvents.slice";
 import { allEventSubmitsSlice } from "./features/event.slice/allEventSubmits.slice";
 
-import { momentsFromPetSlice } from "./features/moment.slice/momentsFromPet.slice";
-import { momentDetailSlice } from "./features/moment.slice/momentDetail.slice";
+
 
 import { commentSlice } from "./features/comment.slice/comment.slice";
 import { replySlice } from "./features/comment.slice/reply.slice";
 import { commentDetailSlice } from "./features/comment.slice/commentDetail.slice";
 import { postCategorySlice } from "./features/postCategory.slice/postCategory.slice";
 
-import { vaccinationsFromPetSlice } from "./features/vaccination.slice/vaccinationsFromPet.slice";
-import { vaccinationDetailSlice } from "./features/vaccination.slice/vaccinationDetail";
+
 
 import { petCoffeeShopDetailSlice } from "./features/petCoffeeShop.slice/petCoffeeShopDetail.slice";
 import { allPetCoffeeShopsSlice } from "./features/petCoffeeShop.slice/allPetCoffeeShops.slice";
@@ -118,12 +116,8 @@ export const store = configureStore({
         joinEvents: joinEventsSlice.reducer,
         allEventSubmits: allEventSubmitsSlice.reducer,
 
-        momentsFromPet: momentsFromPetSlice.reducer,
-        momentDetail: momentDetailSlice.reducer,
 
-        vaccinationsFromPet: vaccinationsFromPetSlice.reducer,
-        vaccinationDetail: vaccinationDetailSlice.reducer,
-
+        
         postDetail: postDetailSlice.reducer,
         post: postSlice.reducer,
 

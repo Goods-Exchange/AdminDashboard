@@ -328,13 +328,17 @@ console.log(getUserDataThunk);
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="login">
-          <Grid container spacing={2}>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={5} className="flex-center">
+          <Grid container spacing={1}>
+            {/* <Grid item xs={1}></Grid> */}
+            {/* <Grid item xs={5} className="flex-center">
+              <img src={GoodExLogo} className="body_login_img" alt="" />
+            </Grid> */}
+            <Grid item xs={12} className="flex-center">
+          
+              <div className="login__form">
+              <Grid item xs={5} className="flex-center">
               <img src={GoodExLogo} className="body_login_img" alt="" />
             </Grid>
-            <Grid item xs={5} className="flex-center">
-              <div className="login__form">
                 <h3 className="login__title">đăng nhập</h3>
                 <form onSubmit={formik.handleSubmit}>
                   <TextField
@@ -397,13 +401,13 @@ console.log(getUserDataThunk);
                     </div>
                   ) : null}
                   <p style={{ textAlign: "right" }}>
-                    <Link
+                    {/* <Link
                       to="/forgotPassword"
                       variant="body2"
                       className="login__forgot"
                     >
                       Quên mật khẩu?
-                    </Link>
+                    </Link> */}
                   </p>
                   {!showLoadingModal ? (
                     <Button
@@ -436,7 +440,7 @@ console.log(getUserDataThunk);
                     </Link>
                   </p> */}
                 </form>
-                <div className="login__google">
+                {/* <div className="login__google">
                   <div className="login__flex">
                     <div className="login__divide"></div>
                     <span style={{ color: "#8b8b8b" }}>hoặc đăng nhập với</span>
@@ -453,10 +457,10 @@ console.log(getUserDataThunk);
                   ) : (
                     <LoadingModal />
                   )}
-                </div>
+                </div> */}
               </div>
             </Grid>
-            <Grid item xs={1}></Grid>
+            {/* <Grid item xs={1}></Grid> */}
           </Grid>
         </div>
       </ThemeProvider>
