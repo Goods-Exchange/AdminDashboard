@@ -46,6 +46,8 @@
     "luxon": "^3.4.4",
     "mapbox-gl": "^3.2.0",
     "moment": "^2.30.1",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.8.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",

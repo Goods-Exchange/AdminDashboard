@@ -27,24 +27,28 @@ const tiers = [
   {
     title: 'Professional',
     subheader: 'Recommended',
-    price: '15',
+    price: '30.000',
     description: [
+    
       'All limited links',
       'Help center access',
+      'Phone & email support',
       'Priority email support',
-      'Dedicated team',
       'Best deals',
+      'Unlimited product posting',
+      'Offers many benefits +',
     ],
     buttonText: 'Start now',
     buttonVariant: 'contained',
   },
   {
     title: 'Enterprise',
-    price: '30',
+    price: '15.000',
     description: [
       'All limited links',
       'Help center access',
-      'Phone & email support',
+      'Priority email support',
+      'Best deals',
     ],
     buttonText: 'Contact us',
     buttonVariant: 'outlined',
@@ -72,13 +76,10 @@ export default function Pricing() {
         }}
       >
         <Typography component="h2" variant="h4" color="text.primary">
-          Premium
+          Subscription
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          Quickly build an effective pricing table for your potential customers with
-          this layout. <br />
-          It&apos;s built with default Material UI components with little
-          customization.
+        Quickly build an effective pricing table for your potential customers with this layout.
         </Typography>
       </Box>
       <Grid container spacing={3} alignItems="center" justifyContent="center">
@@ -145,7 +146,7 @@ export default function Pricing() {
                   }}
                 >
                   <Typography component="h3" variant="h2">
-                    ${tier.price}
+                    {tier.price} vnđ
                   </Typography>
                   <Typography component="h3" variant="h6">
                     &nbsp; per month

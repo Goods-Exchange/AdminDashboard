@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +12,6 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from '../ToggleColorMode/ToggleColorMode';
 import logo from '../../../../../assets/logoGX.png';
-
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -125,7 +123,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
-                  SUBSCRIPTION
+                    SUBSCRIPTION
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -151,17 +149,17 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="text"
                 size="small"
                 component="a"
-                onClick={() => navigate("/login")}
+                href="/login" // Replace with actual link if needed
                 target="_blank"
               >
-                Sign up
+                Log in
               </Button>
               <Button
                 color="primary"
                 variant="contained"
                 size="small"
                 component="a"
-                onClick={() => navigate("/login")}
+                href="https://expo.dev/accounts/dieuanh14/projects/goods-exchange/builds/486e820b-d147-4386-bd88-0bdf6d23fee5?fbclid=IwY2xjawEZ67lleHRuA2FlbQIxMAABHY22SLNGOEE1T3adoLiXQF8xERUXKhQ6b_vxXlQYZd2C-FaQ6ja3NNFKwg_aem_Vf37TouB4Kc4Z9jw6pRU8A" // Replace with actual link
                 target="_blank"
               >
                 Free Download
@@ -211,7 +209,6 @@ function AppAppBar({ mode, toggleColorMode }) {
                   <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
                   <Divider />
                   <MenuItem>
-                  
                     <Button
                       color="primary"
                       variant="contained"

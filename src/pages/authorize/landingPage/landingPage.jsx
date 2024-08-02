@@ -87,43 +87,40 @@
 //   );
 // }
 
-
-
-
 // -------------------------------------------------------------------------Landing Page 2------------------------------------------------
-import * as React from 'react';
-import { useState } from 'react'
-import PropTypes from 'prop-types';
+import * as React from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
-import AppAppBar from '../landingPage/LandingPageDetail/AppAppBar/AppAppBar';
-import Hero from '../landingPage/LandingPageDetail/Hero/Hero';
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+import AppAppBar from "../landingPage/LandingPageDetail/AppAppBar/AppAppBar";
+import Hero from "../landingPage/LandingPageDetail/Hero/Hero";
 
-import LogoCollection from '../landingPage/LandingPageDetail/LogoCollection/LogoCollection';
-import Highlights from '../landingPage/LandingPageDetail/Highlights/Highlights';
-import Pricing from '../landingPage/LandingPageDetail/Pricing/Pricing';
-import Features from '../landingPage/LandingPageDetail/Features/Features';
-import Testimonials from '../landingPage/LandingPageDetail/Testimonials/Testimonials';
-import FAQ from '../landingPage/LandingPageDetail/FAQ/FAQ';
-import Footer from '../landingPage/LandingPageDetail/Footer/Footer';
-// import CarouselProducts from '../landingPage/LandingPageDetail/CarouselProduct';
-import getLPTheme from './getLPTheme';
+import LogoCollection from "../landingPage/LandingPageDetail/LogoCollection/LogoCollection";
+import Highlights from "../landingPage/LandingPageDetail/Highlights/Highlights";
+import Pricing from "../landingPage/LandingPageDetail/Pricing/Pricing";
+import Features from "../landingPage/LandingPageDetail/Features/Features";
+import Testimonials from "../landingPage/LandingPageDetail/Testimonials/Testimonials";
+import FAQ from "../landingPage/LandingPageDetail/FAQ/FAQ";
+import Footer from "../landingPage/LandingPageDetail/Footer/Footer";
+import CarouselProducts from "../landingPage/LandingPageDetail/CarouselProduct/CarouselProduct";
+import getLPTheme from "./getLPTheme";
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100dvw',
-        position: 'fixed',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100dvw",
+        position: "fixed",
         bottom: 24,
       }}
     >
@@ -158,13 +155,13 @@ ToggleCustomTheme.propTypes = {
 };
 
 export default function LandingPage() {
-  const [mode, setMode] = React.useState('light');
+  const [mode, setMode] = React.useState("light");
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
   const defaultTheme = createTheme({ palette: { mode } });
 
   const toggleColorMode = () => {
-    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setMode((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   const toggleCustomTheme = () => {
@@ -177,10 +174,11 @@ export default function LandingPage() {
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
       <Hero />
 
-      <Box sx={{ bgcolor: 'background.default' }}>
+      <Box sx={{ bgcolor: "background.default" }}>
         {/* <LogoCollection /> */}
-        {/* <CarouselProducts /> */}
+
         <Features />
+        <CarouselProducts />
         <Divider />
         <Testimonials />
         <Divider />
