@@ -57,7 +57,9 @@ export default function AdminHome() {
                         <div
                             style={{
                                 width: isCollapsed === true ? "100%" : "82.3%",
-                                // backgroundColor: "#DBE9F4",
+                              
+                                // backgroundColor: "#F9FAFB",
+                                backgroundColor: "#F2F3F4",
                             }}
                         >
                             <Topbar />
