@@ -7,7 +7,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Typography
+  Typography,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
@@ -89,10 +89,22 @@ const AccountTable = () => {
       }
     });
   };
-  const Header = ({ title, subtitle, titleColor = "black", subtitleColor = "gray" }) => {
+  const Header = ({
+    title,
+    subtitle,
+    titleColor = "black",
+    subtitleColor = "gray",
+  }) => {
     return (
       <Box mb={2}>
-        <Typography style={{ fontFamily:'Source Sans Pro, sans-serif',fontSize:'32px',color:'black',fontWeight:'700' }}>
+        <Typography
+          style={{
+            fontFamily: "Source Sans Pro, sans-serif",
+            fontSize: "32px",
+            color: "black",
+            fontWeight: "700",
+          }}
+        >
           {title}
         </Typography>
         <Typography variant="subtitle1" style={{ color: subtitleColor }}>
@@ -285,6 +297,7 @@ const AccountTable = () => {
   return (
     <Box m="20px">
       <Header title="TÀI KHOẢN" subtitle="Quản Lý Tài Khoản Hệ Thống" />
+
       <Box sx={StyledBox} height="100%">
         <DataGrid
           disableRowSelectionOnClick

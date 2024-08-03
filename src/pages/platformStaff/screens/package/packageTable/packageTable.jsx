@@ -1,4 +1,13 @@
-import { Box, Button } from "@mui/material";
+import {
+  Box,
+  Button,
+  useTheme,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import "./packageTable.css";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../../components/header/Header";
@@ -13,7 +22,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 import Coin from "../../../../../assets/coinvnd.png";
-import Pagination from "../../../../../components/pagination/pagination";
+import Pagination from "../../../../../components/pagination/paginationPackage";
 import { formatPaginationData } from "../../../../../components/format/formatPagination/formatPagination";
 import {
   CustomNoRowsOverlay,
@@ -36,7 +45,7 @@ export default function PackageTable(props) {
   const navigate = useNavigate();
   const packages = useSelector(packagesSelector);
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(20);
   const [pageNumber, setPageNumber] = useState(1);
 
   const packagesData = formatPaginationData(packages, pageNumber, pageSize);
@@ -45,7 +54,30 @@ export default function PackageTable(props) {
     setShowLoadingModal(true);
     dispatch(getPackagesThunk()).then(() => setShowLoadingModal(false));
   }, []);
-
+  const Header = ({
+    title,
+    subtitle,
+    titleColor = "black",
+    subtitleColor = "gray",
+  }) => {
+    return (
+      <Box mb={2}>
+        <Typography
+          style={{
+            fontFamily: "Source Sans Pro, sans-serif",
+            fontSize: "32px",
+            color: "black",
+            fontWeight: "700",
+          }}
+        >
+          {title}
+        </Typography>
+        <Typography variant="subtitle1" style={{ color: subtitleColor }}>
+          {subtitle}
+        </Typography>
+      </Box>
+    );
+  };
   const columns = [
     {
       field: "order",
@@ -64,27 +96,27 @@ export default function PackageTable(props) {
     },
     {
       field: "subcriptionType",
-      headerName: "Loại Gói",
+      headerName: "Subscription Type",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
       field: "expiryMonth",
       flex: 1,
-      headerName: "Thời hạn",
+      headerName: "Expiry Month",
       renderCell: ({ row: { expiryMonth } }) => <div>{expiryMonth} Tháng</div>,
     },
     {
       field: "description",
       flex: 1,
-      headerName: "Nội dung",
+      headerName: "Description",
       renderCell: ({ row: { description } }) => <div>{description}</div>,
     },
     {
       field: "price",
       flex: 1,
       headerAlign: "center",
-      headerName: "Giá tiền gói đăng kí",
+      headerName: "Price",
       renderCell: ({ row: { price } }) => (
         <Box
           display="flex"
@@ -98,62 +130,10 @@ export default function PackageTable(props) {
         </Box>
       ),
     },
-    // {
-    //     field: "promotionAmount",
-    //     headerName: "Giá Tiền Trước Chiết Khấu",
-    //     headerAlign: "center",
-    //     flex: 1,
-    //     renderCell: ({ row: { promotionAmount } }) => (
-    //         <Box
-    //             display="flex"
-    //             alignItems="center"
-    //             justifyContent="center"
-    //             width="100%"
-    //             gap="6px"
-    //         >
-    //             {promotionAmount.toLocaleString()}
-    //             <img src={Coin} alt="" style={{ width: "35px" }} />
-    //         </Box>
-    //     ),
-    // },
-    // {
-    //     field: "promotionDiscount",
-    //     headerName: "Chiết Khấu",
-    //     headerAlign: "center",
-    //     renderCell: ({ row: { promotionDiscount } }) => (
-    //         <Box
-    //             display="flex"
-    //             justifyContent="center"
-    //             alignItems="center"
-    //             width="100%"
-    //         >
-    //             {promotionDiscount} %
-    //         </Box>
-    //     ),
-    // },
-    // {
-    //     headerName: "Nội dung",
-    //     headerAlign: "center",
-    //     flex: 1,
-    //     renderCell: ({ row: { promotionDiscount, promotionAmount } }) => (
-    //         <Box
-    //             display="flex"
-    //             alignItems="center"
-    //             justifyContent="center"
-    //             width="100%"
-    //             gap="6px"
-    //         >
-    //             {(
-    //                 (promotionAmount * (100 - promotionDiscount)) /
-    //                 100
-    //             ).toLocaleString()}
-    //             <img src={Coin} alt="" style={{ width: "35px" }} />
-    //         </Box>
-    //     ),
-    // },
+   
     {
       field: "activity",
-      headerName: "Hành Động",
+      headerName: "Action",
       flex: 1,
       headerAlign: "center",
       sortable: false,
@@ -265,7 +245,7 @@ export default function PackageTable(props) {
             Tạo Gói
           </Button>
         </div>
-        <Box height="68vh" sx={StyledBox}>
+        <Box height="100%" sx={StyledBox}>
           <DataGrid
             loading={showLoadingModal}
             slots={{
