@@ -22,6 +22,8 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
+import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
+import { AccountCircleOutlined } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
@@ -117,7 +119,7 @@ const Sidebar = (props) => {
                                 color={colors.grey[300]}
                                 sx={{ m: "15px 0 5px 20px" }}
                             >
-                                Quản Lý
+                                Management
                             </Typography>
                             <List>
                                 <ListItemButton onClick={handleClick}>
@@ -132,7 +134,7 @@ const Sidebar = (props) => {
                                     )}
                                     {!isCollapsed && (
                                         <ListItemText
-                                            primary="Hệ Thống"
+                                            primary="System"
                                             style={{
                                                 color: "white",
                                             }}
@@ -161,14 +163,28 @@ const Sidebar = (props) => {
                                     style={{
                                         paddingLeft: !isCollapsed ? "20px" : 0,
                                     }}
-                                >
+                                > 
+                                 <Item
+                                        title="Account"
+                                        to="account"
+                                        icon={<AccountCircleOutlined />}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
                                     <Item
-                                        title="Quản lý POTS"
+                                        title="Post Management"
                                         to=""
                                         icon={<HomeOutlinedIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     />
+                                    <Item
+                                title="Wallet Transaction"
+                                to="wallet"
+                                icon={<WalletOutlinedIcon />}
+                                selected={selected}
+                                setSelected={setSelected}
+                            />
                                     {/* <Item
                                         title="Quà Tặng"
                                         to="item"
@@ -177,14 +193,14 @@ const Sidebar = (props) => {
                                         setSelected={setSelected}
                                     /> */}
                                     <Item
-                                        title="Gói Đăng Ký"
+                                        title="Subscription"
                                         to="package"
                                         icon={<SubscriptionsIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     />
                                     <Item
-                                        title="Báo Cáo"
+                                        title="Report"
                                         to="report"
                                         icon={<ReportGmailerrorredIcon />}
                                         selected={selected}

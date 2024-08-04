@@ -575,11 +575,11 @@ export default function ShopTableStaff() {
           rows={rows}
           columns={columns}
         />
-         <ShopBackdrop
+         {/* <ShopBackdrop
           open={open}
           handleClose={handleClose}
           shopDetail={shopDetail}
-        />
+        /> */}
       </Box>
     </Box>
   );

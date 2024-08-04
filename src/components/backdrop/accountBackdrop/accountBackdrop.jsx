@@ -36,7 +36,7 @@ export function AccountBackdrop(props) {
                             className="avatar"
                         />
                         <img
-                            src={userDetail.background || NoBackground}
+                            src={userDetail.profileImage || NoBackground}
                             alt=""
                             className="background"
                         />

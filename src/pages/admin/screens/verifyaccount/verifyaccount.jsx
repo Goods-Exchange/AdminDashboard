@@ -328,11 +328,14 @@ export default function verifyaccount() {
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(5);
   const [pageNumber, setPageNumber] = useState(0);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getAllVerifyUsersThunk());
   }, []);
-
+  const handleClose = () => {
+    setOpen(false);
+};
   // const handleAccept = (id) => {
   //   setShowLoadingModal(true);
   //   dispatch(approveUserThunk(id)).then(() => {
@@ -621,7 +624,7 @@ export default function verifyaccount() {
         {/* <AccountBackdrop
                     open={open}
                     handleClose={handleClose}
-                    userDetail={userDetail}
+                    userDetail={accounts}
                 /> */}
         {/* {accounts.email} */}
       </Box>

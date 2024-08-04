@@ -83,35 +83,36 @@ export const StyledBox = () => {
   const colors = tokens(theme.palette.mode);
   return {
     "& .MuiDataGrid-root": {
-      border: "none"
+      border: "none",
+      boxShadow: "0 0 0px rgba(0, 0, 0, 0.5), 0 0 0px rgba(0, 0, 0, 0.5), 0 0 9px rgba(0, 0, 0, 0.5)",
     },
     //Màu của từng hàng trong tên trong bảng
     "& .MuiDataGrid-cell": {
-        borderBottom: `0.1px solid  #DADADA !important`,
+      borderBottom: `0.1px solid  #DADADA !important`,
       color: "black ",
       fontSize: "12px",
       fontWeight: 580,
     },
     //Màu chữ trong bảng
     "& .name-column--cell": {
-    //   color: colors.greenAccent[300],
-      color:'#02225D',
+      //   color: colors.greenAccent[300],
+      color: "#02225D",
       fontSize: "12px",
       fontWeight: 680,
     },
     // Màu header
     "& .MuiDataGrid-columnHeaders": {
       // backgroundColor: colors.blueAccent[700],
-     
+
       borderBottom: `1px solid #d3d3d3`,
-    //   backgroundColor: "#F9FAFB !important",
-    backgroundColor: '#DBE9F4 !important',
+      //   backgroundColor: "#F9FAFB !important",
+      backgroundColor: "#DBE9F4 !important",
       borderBottom: "none",
       color: "#858585 ",
       fontWeight: 600,
       fontSize: "12px",
     },
-      // Màu icon trong header và footer
+    // Màu icon trong header và footer
     "& .MuiSvgIcon-root": {
       color: "black !important", // Đổi màu icon trong header
     },
@@ -120,23 +121,23 @@ export const StyledBox = () => {
     },
     //Màu trong bảng nội dung processing
     "& .MuiDataGrid-virtualScroller": {
-    //   backgroundColor: colors.primary[400],
-    backgroundColor: "#F9FAFB !important",
-   height: "70%",
+      //   backgroundColor: colors.primary[400],
+      backgroundColor: "#F9FAFB !important",
+      height: "70%",
     },
     //Màu footer
     "& .MuiDataGrid-footerContainer": {
       borderTop: "none",
       // backgroundColor: colors.blueAccent[700],
       color: "black !important",
-    //   backgroundColor: '#F9FAFB !important'
-    backgroundColor: '#DBE9F4 !important'
+      //   backgroundColor: '#F9FAFB !important'
+      backgroundColor: "#DBE9F4 !important",
     },
     "& .MuiCheckbox-root": {
       color: `${colors.greenAccent[200]} !important`,
     },
-    '& .MuiDataGrid-row:hover': {
-      backgroundColor: '#f0f0f0 !important', // Màu xám bạc khi hover vào hàng
+    "& .MuiDataGrid-row:hover": {
+      backgroundColor: "#f0f0f0 !important", // Màu xám bạc khi hover vào hàng
     },
   };
 };

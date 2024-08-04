@@ -113,11 +113,12 @@ const Sidebar = (props) => {
                                     style={{
                                         borderRadius: "50%",
                                         objectFit: "cover",
+                                        
                                     }}
                                 />
                                 <Typography
                                     variant="h5"
-                                    color={colors.blueAccent[800]}
+                                    color={"white"}
                                     fontWeight="bold"
                                 >
                                     {userData.role}

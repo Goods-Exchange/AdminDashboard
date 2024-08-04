@@ -178,6 +178,14 @@ const router = createBrowserRouter([
                 element: <ShopTableStaff />,
             },
             {
+                path: "account",
+                element: <AccountTable />,
+            },
+            {
+                path: "wallet",
+                element: <WalletTableAdmin />,
+            },
+            {
                 path: "item",
                 element: <ItemTable direction="staff" />,
             },
