@@ -25,6 +25,7 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
@@ -129,7 +130,7 @@ const Sidebar = (props) => {
                                 color={colors.grey[300]}
                                 sx={{ m: "15px 0 5px 20px" }}
                             >
-                                Thống Kê
+                               Statistics
                             </Typography>
                             <Item
                                 title="Admin Dashboard"
@@ -144,7 +145,7 @@ const Sidebar = (props) => {
                                 color={colors.grey[300]}
                                 sx={{ m: "15px 0 5px 20px" }}
                             >
-                                Quản Lý
+                               Management
                             </Typography>
                             <List>
                                 <ListItemButton onClick={handleClick}>
@@ -159,7 +160,7 @@ const Sidebar = (props) => {
                                     )}
                                     {!isCollapsed && (
                                         <ListItemText
-                                            primary="Hệ Thống"
+                                            primary="System"
                                             style={{
                                                 color: "white",
                                             }}
@@ -190,28 +191,28 @@ const Sidebar = (props) => {
                                     }}
                                 >
                                     <Item
-                                        title="Tài Khoản"
+                                        title="Account"
                                         to="account"
                                         icon={<AccountCircleOutlined />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     />
                                     <Item
-                                        title="Xác minh Tài khoản"
+                                        title="Verify Account"
                                         to="verifyAccount"
-                                        icon={<AccountCircleOutlined />}
+                                        icon={<HowToRegIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     />
                                     <Item
-                                        title="Giao Dịch"
+                                        title="Wallet Transaction"
                                         to="wallet"
                                         icon={<WalletOutlinedIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     />
                                     <Item
-                                        title="Quản lý Post"
+                                        title="Post Management"
                                         to="shop"
                                         icon={<HomeOutlinedIcon />}
                                         selected={selected}
@@ -219,14 +220,14 @@ const Sidebar = (props) => {
                                     />
                                
                                     <Item
-                                        title="Gói Đăng Ký"
+                                        title="Subscription"
                                         to="package"
                                         icon={<SubscriptionsIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     />
                                     <Item
-                                        title="Báo Cáo"
+                                        title="Report "
                                         to="report"
                                         icon={<ReportGmailerrorredIcon />}
                                         selected={selected}

@@ -1,26 +1,35 @@
 import * as React from "react";
 import "./createPackage.css";
-import { Button, TextField } from "@mui/material";
+import { TextField, Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import { useFormik } from "formik";
-import {
-    getPackagesThunk,
-    createPackageThunk,
-} from "../../../../../store/apiThunk/packageThunk";
+import { createPackageThunk } from "../../../../../store/apiThunk/packageThunk";
 import Header from "../../../components/header/Header";
 import { BackButton } from "../../../../../components/modal/backModal/backModal";
 import LoadingModal from "../../../../../components/modal/loadingModal/loadingModal";
-import { FormatCurrency } from "../../../../../components/format/formatAmount/formatAmount";
 import { ADDPACKAGESUCCESS, ERRORTEXT, SUCCESSTEXT } from "../../../../../components/text/notiText/notiText";
 
 export default function CreatePackage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showLoadingModal, setShowLoadingModal] = useState(false);
+
+    const Header = ({ title, subtitle, titleColor = "black", subtitleColor = "gray" }) => {
+        return (
+            <Box mb={2}>
+                <Typography style={{ fontFamily: 'Source Sans Pro, sans-serif', fontSize: '32px', color: titleColor, fontWeight: '700' }}>
+                    {title}
+                </Typography>
+                <Typography variant="subtitle1" style={{ color: subtitleColor }}>
+                    {subtitle}
+                </Typography>
+            </Box>
+        );
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -32,7 +41,6 @@ export default function CreatePackage() {
         validationSchema: Yup.object({
             description: Yup.string().required("Mô tả không thể trống"),
             expiryMonth: Yup.number().required("Tháng không thể trống"),
-            
         }),
         onSubmit: async (values) => {
             setShowLoadingModal(true);
@@ -77,13 +85,6 @@ export default function CreatePackage() {
         },
     });
 
-    // const handleInputChange = (event, formik) => {
-    //     let inputValue = event.target.value;
-    //     let rawValue = inputValue.replace(/[^0-9]/g, "");
-    //     formik.setFieldValue("promotionAmount", rawValue);
-    //     event.target.value = FormatCurrency(rawValue);
-    // };
-
     return (
         <div className="createPackage">
             <Header
@@ -107,6 +108,16 @@ export default function CreatePackage() {
                         autoComplete="subcriptionType"
                         margin="dense"
                         color="secondary"
+                        InputLabelProps={{
+                            style: { color: 'black' } // Đặt màu sắc của nhãn thành màu đen
+                        }}
+                        InputProps={{
+                            style: {
+                                backgroundColor: '#f5f5f5', // Nền của input màu xám nhạt
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Hiệu ứng bóng nhẹ
+                                color: 'black' // Màu chữ bên trong ô input
+                            }
+                        }}
                     />
                     {formik.touched.subcriptionType &&
                         formik.errors.subcriptionType && (
@@ -115,8 +126,8 @@ export default function CreatePackage() {
                             </div>
                         )}
                 </>
-                     {/* description */}
-                     <>
+                {/* description */}
+                <>
                     <TextField
                         id="description"
                         label={
@@ -131,6 +142,16 @@ export default function CreatePackage() {
                         autoComplete="description"
                         margin="dense"
                         color="secondary"
+                        InputLabelProps={{
+                            style: { color: 'black' } // Đặt màu sắc của nhãn thành màu đen
+                        }}
+                        InputProps={{
+                            style: {
+                                backgroundColor: '#f5f5f5', // Nền của input màu xám nhạt
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Hiệu ứng bóng nhẹ
+                                color: 'black' // Màu chữ bên trong ô input
+                            }
+                        }}
                     />
                     {formik.touched.description &&
                         formik.errors.description && (
@@ -139,15 +160,13 @@ export default function CreatePackage() {
                             </div>
                         )}
                 </>
-                
                 {/* expiryMonth */}
                 <>
                     <TextField
                         id="expiryMonth"
                         label={
                             <span>
-                                Thời Hạn (tháng){" "}
-                                <span style={{ color: "red" }}>*</span>
+                                Thời Hạn (tháng) <span style={{ color: "red" }}>*</span>
                             </span>
                         }
                         variant="outlined"
@@ -158,6 +177,16 @@ export default function CreatePackage() {
                         margin="dense"
                         type="number"
                         color="secondary"
+                        InputLabelProps={{
+                            style: { color: 'black' } // Đặt màu sắc của nhãn thành màu đen
+                        }}
+                        InputProps={{
+                            style: {
+                                backgroundColor: '#f5f5f5', // Nền của input màu xám nhạt
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Hiệu ứng bóng nhẹ
+                                color: 'black' // Màu chữ bên trong ô input
+                            }
+                        }}
                     />
                     {formik.touched.expiryMonth && formik.errors.expiryMonth && (
                         <div className="login__validation__error">
@@ -165,7 +194,6 @@ export default function CreatePackage() {
                         </div>
                     )}
                 </>
-                {/* price */}
                 {/* price */}
                 <>
                     <TextField
@@ -179,6 +207,16 @@ export default function CreatePackage() {
                         margin="dense"
                         type="number"
                         color="secondary"
+                        InputLabelProps={{
+                            style: { color: 'black' } // Đặt màu sắc của nhãn thành màu đen
+                        }}
+                        InputProps={{
+                            style: {
+                                backgroundColor: '#f5f5f5', // Nền của input màu xám nhạt
+                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Hiệu ứng bóng nhẹ
+                                color: 'black' // Màu chữ bên trong ô input
+                            }
+                        }}
                     />
                     {formik.touched.price &&
                         formik.errors.price && (
@@ -187,7 +225,6 @@ export default function CreatePackage() {
                             </div>
                         )}
                 </>
-                
                 {!showLoadingModal ? (
                     <div
                         style={{
@@ -198,11 +235,12 @@ export default function CreatePackage() {
                             marginTop: "30px",
                         }}
                     >
-                        <BackButton />
+                        <BackButton style={{ fontSize: '14px' }} /> {/* Thay đổi kích cỡ chữ ở đây */}
                         <Button
                             className="login__btn"
                             style={{
                                 backgroundColor: "#70d8bd",
+                                fontSize: '14px', // Thay đổi kích cỡ chữ của nút Tạo
                             }}
                             variant="contained"
                             type="submit"

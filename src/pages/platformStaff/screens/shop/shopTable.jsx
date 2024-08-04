@@ -383,7 +383,7 @@ export default function ShopTableStaff() {
   const shopDetail = useSelector(petCoffeeShopDetailSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-  const [pageSize, setPageSize] = useState(60);
+  const [pageSize, setPageSize] = useState(10);
   const [pageIndex, setPageIndex] = useState(0);
   const [open, setOpen] = useState(false);
 

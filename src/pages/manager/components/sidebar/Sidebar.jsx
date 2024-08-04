@@ -133,10 +133,10 @@ const Sidebar = (props) => {
                                 color={colors.grey[300]}
                                 sx={{ m: "15px 0 5px 20px" }}
                             >
-                                Thống Kê
+                                Statistics
                             </Typography>
                             <Item
-                                title="Thu Chi"
+                                title="Thống kê"
                                 to=""
                                 icon={<BarChartIcon />}
                                 selected={selected}
@@ -148,7 +148,7 @@ const Sidebar = (props) => {
                                 color={colors.grey[300]}
                                 sx={{ m: "15px 0 5px 20px" }}
                             >
-                                Quản Lý
+                                Management
                             </Typography>
                             <List>
                                 <ListItemButton onClick={handleClick}>
