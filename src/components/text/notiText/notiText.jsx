@@ -24,9 +24,14 @@ const CONFIRMDELETEITEM = "Xóa Quà Tặng?";
 const DELETEITEMSUCCESS = "Xóa Quà Tặng Thành Công!!";
 const UPDATEITEMSUCCESS = "Cập Nhật Quà Tặng Thành Công!!";
 const ADDPACKAGESUCCESS = "Tạo Gói Đăng Ký Thành Công!!";
+const ADDCATEGORYSUCCESS = "Tạo Category Thành Công!!";
 const CONFIRMDELETEPACKAGE = "Xóa Gói Đăng Ký?";
+
 const DELETEPACKAGESUCCESS = "Xóa Gói Đăng Ký Thành Công!!";
+const DELETECATEGORYSUCCESS = "Xóa Category Thành Công!!";
+const CONFIRMDELETECATEGORY = "Xóa Category?";
 const UPDATEPACKAGESUCCESS = "Cập Nhật Gói Đăng Ký Thành Công!!";
+const UPDATECATEGORYSUCCESS = "Cập Nhật Category Thành Công!!";
 const ADDEVENTSUCCESS = "Tạo Sự Kiện Thành Công!!";
 const CONFIRMDELETEEVENT = "Xóa Sự Kiện?";
 const DELETEEVENTSUCCESS = "Xóa Sự Kiện Thành Công!!";
@@ -45,6 +50,10 @@ const UPDATEPROMOTIONSUCCESS = "Cập Nhật Khuyến Mãi Thành Công!!";
 const ADDSTAFFSUCCESS = "Tạo Tài Khoản Nhân Viên Thành Công!!";
 
 export {
+    UPDATECATEGORYSUCCESS,
+    ADDCATEGORYSUCCESS,
+    CONFIRMDELETECATEGORY,
+    DELETECATEGORYSUCCESS,
     ADDSTAFFSUCCESS,
     UPDATEPROMOTIONSUCCESS,
     DELETEPROMOTIONSUCCESS,

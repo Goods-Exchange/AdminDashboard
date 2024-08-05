@@ -66,6 +66,8 @@ import CreatePackage from "./pages/platformStaff/screens/package/createPackage/c
 import UpdatePackage from "./pages/platformStaff/screens/package/updatePackage/updatePackage";
 import PackageTable from "./pages/platformStaff/screens/package/packageTable/packageTable";
 import CategoryList from "./pages/platformStaff/screens/categoryList/categorydetail/categorydetail";
+import CreateCategoryList from "./pages/platformStaff/screens/categoryList/createCategory/createCategory";
+import UpdateCategoryList from "./pages/platformStaff/screens/categoryList/updateCategory/updateCategory";
 import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 
 const router = createBrowserRouter([
@@ -169,7 +171,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "category",
-                element: <CategoryList />,
+                element: <CategoryList direction="admin" />,
+            },
+            {
+                path: "createCategory",
+                element: <CreateCategoryList />,
+            },
+            {
+                path: "updateCategory",
+                element: <UpdateCategoryList />,
             },
             {
                 path: "ordertable",
@@ -225,7 +235,19 @@ const router = createBrowserRouter([
             },
             {
                 path: "category",
-                element: <CategoryList />,
+                element: <CategoryList direction="staff"/>,
+            },
+            {
+                path: "createCategory",
+                element: <CreateCategoryList />,
+            },
+            {
+                path: "updateCategory",
+                element: <UpdateCategoryList />,
+            },
+            {
+                path: "ordertable",
+                element: <OrdertrackTable />,
             },
         ],
     },

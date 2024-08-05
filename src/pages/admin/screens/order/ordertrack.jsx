@@ -21,9 +21,9 @@ import {
   unbanUserThunk,
 } from "../../../../store/apiThunk/userThunk";
 import {
-    getAllOrdersThunk,
-    cancelOrderThunk
-  } from "../../../../store/apiThunk/orderThunk";
+  getAllOrdersThunk,
+  cancelOrderThunk,
+} from "../../../../store/apiThunk/orderThunk";
 import {
   StyledBox,
   CustomNoRowsOverlay,
@@ -93,6 +93,30 @@ const OrdertrackTable = () => {
       }
     });
   };
+  const Header = ({
+    title,
+    subtitle,
+    titleColor = "black",
+    subtitleColor = "gray",
+  }) => {
+    return (
+      <Box mb={2}>
+        <Typography
+          style={{
+            fontFamily: "Source Sans Pro, sans-serif",
+            fontSize: "32px",
+            color: "black",
+            fontWeight: "700",
+          }}
+        >
+          {title}
+        </Typography>
+        <Typography variant="subtitle1" style={{ color: subtitleColor }}>
+          {subtitle}
+        </Typography>
+      </Box>
+    );
+  };
 
   const columns = [
     {
@@ -111,26 +135,26 @@ const OrdertrackTable = () => {
       ),
     },
     {
-        field: "orderId",
-        headerName: "Sender Name",
-        flex: 1,
-        cellClassName: "name-column--cell",
-        renderCell: ({ row: { orderId } }) => {
-          const handleOpen = () => {
-            setShowLoadingModal(true);
-            dispatch(getAllOrdersThunk(orderId)).then(() => {
-              setShowLoadingModal(false);
-              setOpen(true);
-            });
-          };
-          return (
-            <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-              {orderId}
-            </div>
-          );
-        },
+      field: "orderId",
+      headerName: "Sender Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+      renderCell: ({ row: { orderId } }) => {
+        const handleOpen = () => {
+          setShowLoadingModal(true);
+          dispatch(getAllOrdersThunk(orderId)).then(() => {
+            setShowLoadingModal(false);
+            setOpen(true);
+          });
+        };
+        return (
+          <div onClick={handleOpen} style={{ cursor: "pointer" }}>
+            {orderId}
+          </div>
+        );
       },
-   
+    },
+
     {
       field: "senderUsername",
       headerName: "Sender Name",
@@ -151,7 +175,7 @@ const OrdertrackTable = () => {
         );
       },
     },
-   
+
     {
       field: "postTitle",
       headerName: "Post Title",
@@ -165,24 +189,24 @@ const OrdertrackTable = () => {
       renderCell: ({ row: { postContent } }) => <div>{postContent}</div>,
     },
     {
-        field: "orderStatus",
-        headerName: "Status",
-        renderCell: ({ row: { orderStatus } }) => (
-          <div
-            className={
-              orderStatus === "Pending"
-                ? "status-Pending"
-                : orderStatus === "Delivered"
-                ? "status-Delivered"
-                : orderStatus === "Reject"
-                ? "status-Rejected"
-                : "status-Canceled"
-            }
-          >
-            {orderStatus}
-          </div>
-        ),
-      },
+      field: "orderStatus",
+      headerName: "Status",
+      renderCell: ({ row: { orderStatus } }) => (
+        <div
+          className={
+            orderStatus === "Pending"
+              ? "status-Pending"
+              : orderStatus === "Delivered"
+              ? "status-Delivered"
+              : orderStatus === "Reject"
+              ? "status-Rejected"
+              : "status-Canceled"
+          }
+        >
+          {orderStatus}
+        </div>
+      ),
+    },
     {
       field: "action",
       headerName: "Action",
@@ -191,7 +215,6 @@ const OrdertrackTable = () => {
       renderCell: ({ row: { orderId } }) => {
         return (
           <Box width="100%" display="flex" justifyContent="center" gap="4px">
-       
             <Button
               variant="contained"
               style={{
@@ -215,8 +238,8 @@ const OrdertrackTable = () => {
       order: index + 1,
       id: account.orderId, // Ensure each row has a unique id
       senderUsername: account.user.senderUsername, // Extract senderUsername
-      postTitle: account.post.postTitle, 
-      postContent: account.post.postContent, 
+      postTitle: account.post.postTitle,
+      postContent: account.post.postContent,
     })) || [];
 
   const handlePageChange = (newPage) => {

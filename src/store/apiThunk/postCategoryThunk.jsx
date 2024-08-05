@@ -15,7 +15,7 @@ export const updatePostCategoryThunk = createAsyncThunk(
 
 export const createPostCategoryThunk = createAsyncThunk(
     'postCategory/createPostCategory',
-    async (data, thunkAPI) => {
+    async (data,thunkAPI) => {
         try {
             const response = await createPostCategory(data);
             return response;
@@ -28,9 +28,9 @@ export const createPostCategoryThunk = createAsyncThunk(
 
 export const getPostCategoryThunk = createAsyncThunk(
     'postCategory/getPostCategory',
-    async (id, thunkAPI) => {
+    async (thunkAPI) => {
         try {
-            const response = await getPostCategory(id);
+            const response = await getPostCategory();
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);
