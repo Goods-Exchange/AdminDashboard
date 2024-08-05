@@ -65,6 +65,8 @@ import UpdateItem from "./pages/platformStaff/screens/item/updateItem/updateItem
 import CreatePackage from "./pages/platformStaff/screens/package/createPackage/createPackage";
 import UpdatePackage from "./pages/platformStaff/screens/package/updatePackage/updatePackage";
 import PackageTable from "./pages/platformStaff/screens/package/packageTable/packageTable";
+import CategoryList from "./pages/platformStaff/screens/categoryList/categorydetail/categorydetail";
+import OrdertrackTable from "./pages/admin/screens/order/ordertrack";
 
 const router = createBrowserRouter([
     {
@@ -165,6 +167,14 @@ const router = createBrowserRouter([
                 path: "createPackage",
                 element: <CreatePackage />,
             },
+            {
+                path: "category",
+                element: <CategoryList />,
+            },
+            {
+                path: "ordertable",
+                element: <OrdertrackTable />,
+            },
         ],
     },
     //Staff
@@ -212,6 +222,10 @@ const router = createBrowserRouter([
             {
                 path: "createPackage",
                 element: <CreatePackage />,
+            },
+            {
+                path: "category",
+                element: <CategoryList />,
             },
         ],
     },

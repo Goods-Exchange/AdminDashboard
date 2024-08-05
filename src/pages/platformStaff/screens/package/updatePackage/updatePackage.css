@@ -1,6 +1,8 @@
 .updatePackage {
-    padding-top: 2%;
-    padding-inline: 15%;
+    background-color: #DBE9F4;
+    margin: 80px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .updatePackage .login__validation__error {

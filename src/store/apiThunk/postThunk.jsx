@@ -8,15 +8,15 @@ import {
   LikePost,
   UnlikePost,
   banPost,
-  unbanPost
+  unbanPost,
 } from "../../api/post";
 
 export const getPostThunk = createAsyncThunk(
   //Get posts
   "post/getPost",
-  async ({ pageIndex, pageSize }, thunkAPI) => {
+  async (thunkAPI) => {
     try {
-      const response = await getPost({ pageIndex, pageSize });
+      const response = await getPost();
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -24,27 +24,27 @@ export const getPostThunk = createAsyncThunk(
   }
 );
 export const banPostThunk = createAsyncThunk(
-    "users/banPost",
-    async (id, thunkAPI) => {
-      try {
-        const response = await banPost(id);
-        return response;
-      } catch (error) {
-        return thunkAPI.rejectWithValue(error?.response?.data);
-      }
+  "users/banPost",
+  async (id, thunkAPI) => {
+    try {
+      const response = await banPost(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
     }
-  );
-  export const unbanPostThunk = createAsyncThunk(
-    "users/unbanPost",
-    async (id, thunkAPI) => {
-      try {
-        const response = await unbanPost(id);
-        return response;
-      } catch (error) {
-        return thunkAPI.rejectWithValue(error?.response?.data);
-      }
+  }
+);
+export const unbanPostThunk = createAsyncThunk(
+  "users/unbanPost",
+  async (id, thunkAPI) => {
+    try {
+      const response = await unbanPost(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
     }
-  );
+  }
+);
 export const getPostNewsFeedThunk = createAsyncThunk(
   "post/getPostNewsFeed",
   async ({ pageNumber, pageSize }, thunkAPI) => {

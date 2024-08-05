@@ -38,6 +38,7 @@ import {
   ERRORTEXT,
   SUCCESSTEXT,
 } from "../../../../../components/text/notiText/notiText";
+import ExampleImage from "../../../../../assets/Sub.jpg";
 
 export default function PackageTable(props) {
   const direction = props.direction;
@@ -130,7 +131,7 @@ export default function PackageTable(props) {
         </Box>
       ),
     },
-   
+
     {
       field: "activity",
       headerName: "Action",
@@ -227,6 +228,7 @@ export default function PackageTable(props) {
 
   return (
     <div className="packageTable">
+       {/* <img src={ExampleImage} alt="example" width="100%" height="auto" /> */}
       <Box m="20px">
         {/* <div style={{color:"#3045FF", fontSize:34, fontWeight:900, marginLeft:550,fontFamily:'serif'}}>Subsciption</div>
                       <div style={{color:"#2a2d64", fontSize:20, fontWeight:900,padding:20}}>Quản Lý Gói Đăng Ký Hệ Thống</div> */}

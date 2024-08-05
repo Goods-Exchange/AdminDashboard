@@ -10,12 +10,12 @@ export const getAllSubscription = async () => {
 };
 
 export const getPackageDetail = async (id) => {
-    const response = await api.get(`/api/v1/packages/${id}`);
+    const response = await api.get(`/api/v1/Subcription/SubscriptionDetail/${id}`);
     return response.data;
 };
 
 export const updatePackage = async (data) => {
-    const response = await api.put(`/api/v1/packages`, data);
+    const response = await api.patch(`/api/v1/Subcription/UpdateSubscription`, data);
     return response.data;
 };
 

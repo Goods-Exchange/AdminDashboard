@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -15,41 +14,41 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { tokens } from "../../../../theme";
 import Header from "../../components/header/Header";
-import { allAccountsSelector } from "../../../../store/sellectors";
-import { getPostThunk, banPostThunk, unbanPostThunk } from "../../../../store/apiThunk/postThunk";
+import { allOrdersSelector } from "../../../../store/sellectors";
 import {
   getAllUsersThunk,
   banUserThunk,
   unbanUserThunk,
 } from "../../../../store/apiThunk/userThunk";
 import {
+    getAllOrdersThunk,
+    cancelOrderThunk
+  } from "../../../../store/apiThunk/orderThunk";
+import {
   StyledBox,
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-import { postSelector} from "../../../../store/sellectors";
-// import { CategoryList } from "../../../platformStaff/screens/categoryList/categorydetail/categorydetail";
+import "./ordertrack.css";
 
-// import "./accountTable.css";
-
-const ShopTableStaff = () => {
+const OrdertrackTable = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const accounts = useSelector(postSelector);
+  const accounts = useSelector(allOrdersSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(5); // State for number of rows per page
   const [pageNumber, setPageNumber] = useState(0); // Current page index
 
   useEffect(() => {
-    dispatch(getPostThunk());
+    dispatch(getAllOrdersThunk());
   }, [dispatch]);
 
-  const handleAccept = (id) => {
+  const handleAccept = (orderId) => {
     setShowLoadingModal(true);
-    dispatch(banPostThunk(id))
+    dispatch(banUserThunk(orderId))
       .then(() => {
-        dispatch(getPostThunk()).then(() => {
+        dispatch(getAllOrdersThunk()).then(() => {
           setShowLoadingModal(false);
           Swal.fire({
             title: "Success!",
@@ -68,7 +67,7 @@ const ShopTableStaff = () => {
       });
   };
 
-  const handleDeny = (id) => {
+  const handleDeny = (orderId) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -80,11 +79,11 @@ const ShopTableStaff = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setShowLoadingModal(true);
-        dispatch(unbanPostThunk(id)).then(() => {
-          dispatch(getPostThunk()).then(() => {
+        dispatch(cancelOrderThunk(orderId)).then(() => {
+          dispatch(getAllOrdersThunk()).then(() => {
             Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
+              title: "Cancel!",
+              text: "Your file has been cancel.",
               icon: "success",
             }).then(() => {
               setShowLoadingModal(false);
@@ -94,116 +93,130 @@ const ShopTableStaff = () => {
       }
     });
   };
-  const Header = ({
-    title,
-    subtitle,
-    titleColor = "black",
-    subtitleColor = "gray",
-  }) => {
-    return (
-      <Box mb={2}>
-        <Typography
-          style={{
-            fontFamily: "Source Sans Pro, sans-serif",
-            fontSize: "32px",
-            color: "black",
-            fontWeight: "700",
-          }}
-        >
-          {title}
-        </Typography>
-        <Typography variant="subtitle1" style={{ color: subtitleColor }}>
-          {subtitle}
-        </Typography>
-      </Box>
-    );
-  };
+
   const columns = [
-        {
-          field: "order",
-          headerName: "STT",
-          headerAlign: "center",
-          renderCell: ({ row: { order } }) => (
-            <Box display="flex" justifyContent="center" alignItems="center" width="100%">
-              {order}
-            </Box>
-          ),
-        },
-        {
-          field: "postTitle",
-          headerName: "Post Title",
-          flex: 1,
-          cellClassName: "name-column--cell",
-          renderCell: ({ row: { id, postTitle } }) => {
-            const handleOpen = () => {
-              setShowLoadingModal(true);
-              dispatch(getPostThunk({ id })).then(() => {
-                setShowLoadingModal(false);
-                setOpen(true);
-              });
-            };
-            return (
-              <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-                {postTitle}
-              </div>
-            );
-          },
-        },
-        {
-          field: "postContent",
-          headerName: "Post Content",
-          flex: 1,
-        },
-        {
-          field: "creationDate",
-          headerName: "Creation Date",
-          flex: 1,
-          renderCell: ({ row: { creationDate } }) => (
-            <div>{creationDate}</div>
-          ),
-        },
-        {
-          field: "status",
-          headerName: "Status",
-          flex: 1,
-          renderCell: ({ row: { status } }) => (
-            <div className={status === "Unban" ? "status-not-ban" : "status-ban"}>
-              {status}
+    {
+      field: "order",
+      headerName: "STT",
+      headerAlign: "center",
+      renderCell: ({ row: { order } }) => (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+        >
+          {order}
+        </Box>
+      ),
+    },
+    {
+        field: "orderId",
+        headerName: "Sender Name",
+        flex: 1,
+        cellClassName: "name-column--cell",
+        renderCell: ({ row: { orderId } }) => {
+          const handleOpen = () => {
+            setShowLoadingModal(true);
+            dispatch(getAllOrdersThunk(orderId)).then(() => {
+              setShowLoadingModal(false);
+              setOpen(true);
+            });
+          };
+          return (
+            <div onClick={handleOpen} style={{ cursor: "pointer" }}>
+              {orderId}
             </div>
-          ),
+          );
         },
-        {
-          field: "action",
-          headerName: "Action",
-          headerAlign: "center",
-          flex: 1,
-          renderCell: ({ row: { id } }) => {
-            return (
-              <Box width="100%" display="flex" justifyContent="center" gap="4px">
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: "#55ab95", minWidth: "50px", textTransform: "capitalize" }}
-                  onClick={() => handleAccept(id)}
-                >
-                  Chặn
-                </Button>
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: colors.redAccent[600], minWidth: "50px", textTransform: "capitalize" }}
-                  onClick={() => handleDeny(id)}
-                >
-                  Hủy chặn
-                </Button>
-              </Box>
-            );
-          },
-        },
-      ];
+      },
+   
+    {
+      field: "senderUsername",
+      headerName: "Sender Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+      renderCell: ({ row: { orderId, senderUsername } }) => {
+        const handleOpen = () => {
+          setShowLoadingModal(true);
+          dispatch(getAllOrdersThunk(orderId)).then(() => {
+            setShowLoadingModal(false);
+            setOpen(true);
+          });
+        };
+        return (
+          <div onClick={handleOpen} style={{ cursor: "pointer" }}>
+            {senderUsername}
+          </div>
+        );
+      },
+    },
+   
+    {
+      field: "postTitle",
+      headerName: "Post Title",
+      flex: 1,
+      renderCell: ({ row: { postTitle } }) => <div>{postTitle}</div>,
+    },
+    {
+      field: "postContent",
+      headerName: "Post Content",
+      flex: 1,
+      renderCell: ({ row: { postContent } }) => <div>{postContent}</div>,
+    },
+    {
+        field: "orderStatus",
+        headerName: "Status",
+        renderCell: ({ row: { orderStatus } }) => (
+          <div
+            className={
+              orderStatus === "Pending"
+                ? "status-Pending"
+                : orderStatus === "Delivered"
+                ? "status-Delivered"
+                : orderStatus === "Reject"
+                ? "status-Rejected"
+                : "status-Canceled"
+            }
+          >
+            {orderStatus}
+          </div>
+        ),
+      },
+    {
+      field: "action",
+      headerName: "Action",
+      headerAlign: "center",
+      flex: 1,
+      renderCell: ({ row: { orderId } }) => {
+        return (
+          <Box width="100%" display="flex" justifyContent="center" gap="4px">
+       
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: colors.blueAccent[400],
+                minWidth: "50px",
+                textTransform: "capitalize",
+              }}
+              onClick={() => handleDeny(orderId)}
+            >
+              Cancel
+            </Button>
+          </Box>
+        );
+      },
+    },
+  ];
 
   const rows =
     accounts?.map((account, index) => ({
       ...account,
       order: index + 1,
+      id: account.orderId, // Ensure each row has a unique id
+      senderUsername: account.user.senderUsername, // Extract senderUsername
+      postTitle: account.post.postTitle, 
+      postContent: account.post.postContent, 
     })) || [];
 
   const handlePageChange = (newPage) => {
@@ -284,8 +297,7 @@ const ShopTableStaff = () => {
 
   return (
     <Box m="20px">
-      {/* <CategoryList/> */}
-      <Header title="POSTS" subtitle="Quản Lý Bài Đăng Hệ Thống" />
+      <Header title="Order Tracking" subtitle="Theo Dõi Đơn Hàng Từ Hệ Thống" />
 
       <Box sx={StyledBox} height="100%">
         <DataGrid
@@ -309,4 +321,4 @@ const ShopTableStaff = () => {
   );
 };
 
-export default ShopTableStaff;
+export default OrdertrackTable;

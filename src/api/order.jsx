@@ -1,8 +1,8 @@
 import api from "./api";
 
-export const getAllOrders = async (shopId,pageNumber, pageSize) => {
+export const getAllOrders = async () => {
     const response = await api.get(
-        `/api/v1/accounts/orders?ShopId=${shopId}&PageNumber=${pageNumber}&PageSize=${pageSize}`
+        `/api/v1/Order/GetAllOrder`
     );
     return response.data;
 };
@@ -20,6 +20,6 @@ export const getOrderDetail = async (id) => {
 };
 
 export const cancelOrder = async (id) => {
-    const response = await api.put(`/api/v1/order/${id}/return`);
+    const response = await api.put(`/api/v1/Order/CancleOrder`);
     return response.data;
 };

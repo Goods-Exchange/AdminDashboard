@@ -1,7 +1,7 @@
 import api from "./api";
 
-export const getPost = async ({ pageIndex, pageSize }) => {
-    const response = await api.get(`/api/v1/Post/GetAllPost?PageNumber=${pageIndex}&PageSize=${pageSize}`); //get all posts
+export const getPost = async () => {
+    const response = await api.get(`/api/v1/Post/GetAllPost`); //get all posts
     return response.data;
 };
 export const banPost = async (id) => {

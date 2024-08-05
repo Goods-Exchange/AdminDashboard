@@ -44,9 +44,9 @@ export const cancelOrderThunk = createAsyncThunk(
 
 export const getAllOrdersThunk = createAsyncThunk(
     "order/getAllOrders",
-    async ({ shopId,pageNumber, pageSize }, thunkAPI) => {
+    async ( thunkAPI) => {
         try {
-            const response = await getAllOrders(shopId,pageNumber, pageSize);
+            const response = await getAllOrders();
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);

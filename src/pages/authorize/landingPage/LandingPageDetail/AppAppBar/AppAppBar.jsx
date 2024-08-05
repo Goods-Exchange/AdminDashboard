@@ -28,7 +28,9 @@ function AppAppBar({ mode, toggleColorMode }) {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
@@ -149,7 +151,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="text"
                 size="small"
                 component="a"
-                href="/login" // Replace with actual link if needed
+                onClick={handleLoginClick}
                 target="_blank"
               >
                 Log in

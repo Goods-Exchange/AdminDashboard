@@ -13,6 +13,7 @@ import {
 import AccountTable from "../../account/accountTable";
 import WalletTableAdmin from "../../wallet/walletTable";
 import ShopTableStaff from "../../../../platformStaff/screens/shop/shopTable";
+import PackageTable from "../../../../platformStaff/screens/package/packageTable/packageTable";
 
 export default function AdminDashboard() {
     const platformIncome = useSelector(platformIncomeSelector);
@@ -38,6 +39,7 @@ export default function AdminDashboard() {
         <div className="dashboard">
          
             <AccountTable />
+            <PackageTable direction="admin" />
             <WalletTableAdmin />
             <ShopTableStaff />
         </div>

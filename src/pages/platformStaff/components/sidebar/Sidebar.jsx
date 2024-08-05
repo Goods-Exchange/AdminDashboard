@@ -23,8 +23,8 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
 import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
-import { AccountCircleOutlined } from "@mui/icons-material";
-
+import AccountCircleOutlined from "@mui/icons-material/AccountCircleOutlined";
+ 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -192,13 +192,13 @@ const Sidebar = (props) => {
                                         selected={selected}
                                         setSelected={setSelected}
                                     /> */}
-                                    <Item
+                                    {/* <Item
                                         title="Subscription"
                                         to="package"
                                         icon={<SubscriptionsIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
-                                    />
+                                    /> */}
                                     <Item
                                         title="Report"
                                         to="report"

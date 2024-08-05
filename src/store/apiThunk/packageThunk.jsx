@@ -82,7 +82,7 @@ export const getAllSubscriptionThunk = createAsyncThunk(
         }
     }
 );
-
+//UPDATESubscription
 export const updatePackageThunk = createAsyncThunk(
     "package/updatePackage",
     async (data, thunkAPI) => {

@@ -1,0 +1,36 @@
+/* styles.css */
+.status-Delivered {
+    background-color: rgba(0, 167, 111, 0.16);
+    color: #007867; /* Màu chữ trắng */
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+    width: 70px;
+  }
+  
+  .status-Rejected {
+    background-color: rgba(255, 86, 48, 0.16);
+    color: #b71d18; /* Màu chữ trắng */
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+   width: 70px;
+  }
+  .status-Pending {
+    background-color: rgba(173, 190, 75, 0.951);
+    color: #f5f540; /* Màu chữ trắng */
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+   width: 70px;
+  }
+
+  .status-Canceled {
+    background-color: rgba(78, 98, 247, 0.16);
+    color: #4500f5; /* Màu chữ trắng */
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+   width: 70px;
+  }
+  
