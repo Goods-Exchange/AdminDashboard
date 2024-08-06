@@ -44,9 +44,9 @@ const OrdertrackTable = () => {
     dispatch(getAllOrdersThunk());
   }, [dispatch]);
 
-  const handleAccept = (orderId) => {
+  const handleAccept = (id) => {
     setShowLoadingModal(true);
-    dispatch(banUserThunk(orderId))
+    dispatch(banUserThunk(id))
       .then(() => {
         dispatch(getAllOrdersThunk()).then(() => {
           setShowLoadingModal(false);
@@ -67,7 +67,7 @@ const OrdertrackTable = () => {
       });
   };
 
-  const handleDeny = (orderId) => {
+  const handleDeny = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -79,7 +79,7 @@ const OrdertrackTable = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setShowLoadingModal(true);
-        dispatch(cancelOrderThunk(orderId)).then(() => {
+        dispatch(cancelOrderThunk(id)).then(() => {
           dispatch(getAllOrdersThunk()).then(() => {
             Swal.fire({
               title: "Cancel!",
@@ -135,21 +135,21 @@ const OrdertrackTable = () => {
       ),
     },
     {
-      field: "orderId",
-      headerName: "Sender Name",
-      flex: 1,
+      field: "id",
+      headerName: "Order Id",
+      flex: 2,
       cellClassName: "name-column--cell",
-      renderCell: ({ row: { orderId } }) => {
+      renderCell: ({ row: { id } }) => {
         const handleOpen = () => {
           setShowLoadingModal(true);
-          dispatch(getAllOrdersThunk(orderId)).then(() => {
+          dispatch(getAllOrdersThunk(id)).then(() => {
             setShowLoadingModal(false);
             setOpen(true);
           });
         };
         return (
           <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-            {orderId}
+            {id}
           </div>
         );
       },
@@ -160,10 +160,10 @@ const OrdertrackTable = () => {
       headerName: "Sender Name",
       flex: 1,
       cellClassName: "name-column--cell",
-      renderCell: ({ row: { orderId, senderUsername } }) => {
+      renderCell: ({ row: { id, senderUsername } }) => {
         const handleOpen = () => {
           setShowLoadingModal(true);
-          dispatch(getAllOrdersThunk(orderId)).then(() => {
+          dispatch(getAllOrdersThunk(id)).then(() => {
             setShowLoadingModal(false);
             setOpen(true);
           });
@@ -212,7 +212,7 @@ const OrdertrackTable = () => {
       headerName: "Action",
       headerAlign: "center",
       flex: 1,
-      renderCell: ({ row: { orderId } }) => {
+      renderCell: ({ row: { id } }) => {
         return (
           <Box width="100%" display="flex" justifyContent="center" gap="4px">
             <Button
@@ -222,7 +222,7 @@ const OrdertrackTable = () => {
                 minWidth: "50px",
                 textTransform: "capitalize",
               }}
-              onClick={() => handleDeny(orderId)}
+              onClick={() => handleDeny(id)}
             >
               Cancel
             </Button>
@@ -236,7 +236,7 @@ const OrdertrackTable = () => {
     accounts?.map((account, index) => ({
       ...account,
       order: index + 1,
-      id: account.orderId, // Ensure each row has a unique id
+      id: account.id, // Ensure each row has a unique id
       senderUsername: account.user.senderUsername, // Extract senderUsername
       postTitle: account.post.postTitle,
       postContent: account.post.postContent,

@@ -32,7 +32,7 @@ export const getOrdersFromShopThunk = createAsyncThunk(
 
 export const cancelOrderThunk = createAsyncThunk(
     "order/cancelOrder",
-    async (id, thunkAPI) => {
+    async (id,thunkAPI) => {
         try {
             const response = await cancelOrder(id);
             return response;

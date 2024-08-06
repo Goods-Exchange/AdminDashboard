@@ -4,6 +4,10 @@ export const getPostCategory = async () => {
     const response = await api.get(`/api/v1/Category/GetAllCategory`);
     return response.data;
 };
+export const getPostCategoryDetail = async () => {
+    const response = await api.get(`/api/v1/Order/GetOrderDetail/${id}`);
+    return response.data;
+};
 
 export const deletePostCategory = async (id) => {
     const response = await api.delete(`/api/v1/Category/DeleteCategory/${id}`);

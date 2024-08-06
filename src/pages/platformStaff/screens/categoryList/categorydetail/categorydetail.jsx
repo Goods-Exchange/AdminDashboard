@@ -125,7 +125,7 @@ export default function PackageTable(props) {
           width="100%"
           gap="10px"
         >
-          <Button
+          {/* <Button
             variant="contained"
             color="warning"
             onClick={() =>
@@ -136,7 +136,7 @@ export default function PackageTable(props) {
             style={{ color: "white", textTransform: "capitalize" }}
           >
             Sửa
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             color="error"

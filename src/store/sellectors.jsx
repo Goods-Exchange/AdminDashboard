@@ -51,6 +51,8 @@ export const commentSelector = (state) => state.comment.entities;
 export const commentDetailSelector = (state) => state.commentDetail.entities;
 
 export const postCategorySelector = (state) => state.postCategory.entities;
+export const postCategoryDetailSelector = (state) => state.postCategoryDetail?.entities || [];
+
 
 export const allItemsSelector = (state) => state.allItems.entities;
 export const itemDetailSelector = (state) => state.itemDetail.entities;

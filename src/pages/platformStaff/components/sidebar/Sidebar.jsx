@@ -24,197 +24,195 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
 import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
 import AccountCircleOutlined from "@mui/icons-material/AccountCircleOutlined";
- 
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    return (
-        <MenuItem
-            active={selected === title}
-            style={{
-                color: colors.grey[100],
-            }}
-            onClick={() => setSelected(title)}
-            icon={icon}
-        >
-            <Typography>{title}</Typography>
-            <Link to={to} />
-        </MenuItem>
-    );
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  return (
+    <MenuItem
+      active={selected === title}
+      style={{
+        color: colors.grey[100],
+      }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+    >
+      <Typography>{title}</Typography>
+      <Link to={to} />
+    </MenuItem>
+  );
 };
 
 const Sidebar = (props) => {
-    const userData = useSelector(userDataSelector);
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    let isCollapsed = props.isCollapsed;
-    let setIsCollapsed = props.setIsCollapsed;
-    const [selected, setSelected] = useState("Cửa Hàng");
-    const [open, setOpen] = useState(true);
+  const userData = useSelector(userDataSelector);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  let isCollapsed = props.isCollapsed;
+  let setIsCollapsed = props.setIsCollapsed;
+  const [selected, setSelected] = useState("Cửa Hàng");
+  const [open, setOpen] = useState(true);
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
-    const url = new URL(window.location.href);
-    const pathName = url.pathname;
-    const parts = pathName?.split("/");
-    const locationValue = parts[parts.length - 1];
+  const url = new URL(window.location.href);
+  const pathName = url.pathname;
+  const parts = pathName?.split("/");
+  const locationValue = parts[parts.length - 1];
 
-    useEffect(() => {
-        if (locationValue === "item") {
-            setSelected("Quà Tặng");
-        } else if (locationValue === "package") {
-            setSelected("Gói Đăng Ký");
-        } else if (locationValue === "staff") {
-            setSelected("Cửa Hàng");
-        } else if (locationValue === "report") {
-            setSelected("Báo Cáo");
-        }
-    }, [locationValue]);
+  useEffect(() => {
+    if (locationValue === "item") {
+      setSelected("Quà Tặng");
+    } else if (locationValue === "package") {
+      setSelected("Gói Đăng Ký");
+    } else if (locationValue === "staff") {
+      setSelected("Cửa Hàng");
+    } else if (locationValue === "report") {
+      setSelected("Báo Cáo");
+    }
+  }, [locationValue]);
 
-    return (
-        <div className="staffSidebar">
-            <Box sx={StyledSidebar}>
-                <ProSidebar
-                    collapsed={isCollapsed}
-                    style={{
-                        zIndex: 1,
-                    }}
+  return (
+    <div className="staffSidebar">
+      <Box sx={StyledSidebar}>
+        <ProSidebar
+          collapsed={isCollapsed}
+          style={{
+            zIndex: 1,
+          }}
+        >
+          <Menu iconShape="square">
+            <MenuItem
+              icon={
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                  <MenuOutlinedIcon fontSize="large" />
+                </IconButton>
+              }
+            ></MenuItem>
+            {!isCollapsed && (
+              <div className="box">
+                <img
+                  alt="profile-user"
+                  width="50px"
+                  height="50px"
+                  src={Admin}
+                  style={{
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                />
+                <Typography
+                  variant="h5"
+                  color={colors.grey[100]}
+                  fontWeight="bold"
                 >
-                    <Menu iconShape="square">
-                        <MenuItem
-                            icon={
-                                <IconButton
-                                    onClick={() => setIsCollapsed(!isCollapsed)}
-                                >
-                                    <MenuOutlinedIcon fontSize="large" />
-                                </IconButton>
-                            }
-                        ></MenuItem>
-                        {!isCollapsed && (
-                            <div className="box">
-                                <img
-                                    alt="profile-user"
-                                    width="50px"
-                                    height="50px"
-                                    src={Admin}
-                                    style={{
-                                        borderRadius: "50%",
-                                        objectFit: "cover",
-                                    }}
-                                />
-                                <Typography
-                                    variant="h5"
-                                    color={colors.grey[100]}
-                                    fontWeight="bold"
-                                >
-                                    {userData.role}
-                                </Typography>
-                            </div>
-                        )}
-                        <Box>
-                            <Typography
-                                variant="h6"
-                                color={colors.grey[300]}
-                                sx={{ m: "15px 0 5px 20px" }}
-                            >
-                                Management
-                            </Typography>
-                            <List>
-                                <ListItemButton onClick={handleClick}>
-                                    {!isCollapsed && (
-                                        <PersonalVideoIcon
-                                            style={{
-                                                marginLeft: "10px",
-                                                marginRight: "19px",
-                                                color: "white",
-                                            }}
-                                        />
-                                    )}
-                                    {!isCollapsed && (
-                                        <ListItemText
-                                            primary="System"
-                                            style={{
-                                                color: "white",
-                                            }}
-                                        />
-                                    )}
-                                    {open ? (
-                                        <ExpandLess
-                                            style={{
-                                                marginLeft: "10px",
-                                                color: "white",
-                                            }}
-                                        />
-                                    ) : (
-                                        <ExpandMore
-                                            style={{
-                                                marginLeft: "10px",
-                                                color: "white",
-                                            }}
-                                        />
-                                    )}
-                                </ListItemButton>
-                                <Collapse
-                                    in={open}
-                                    timeout="auto"
-                                    unmountOnExit
-                                    style={{
-                                        paddingLeft: !isCollapsed ? "20px" : 0,
-                                    }}
-                                > 
-                                 <Item
+                  {userData.role}
+                </Typography>
+              </div>
+            )}
+            <Box>
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                Management
+              </Typography>
+              <List>
+                <ListItemButton onClick={handleClick}>
+                  {!isCollapsed && (
+                    <PersonalVideoIcon
+                      style={{
+                        marginLeft: "10px",
+                        marginRight: "19px",
+                        color: "white",
+                      }}
+                    />
+                  )}
+                  {!isCollapsed && (
+                    <ListItemText
+                      primary="System"
+                      style={{
+                        color: "white",
+                      }}
+                    />
+                  )}
+                  {open ? (
+                    <ExpandLess
+                      style={{
+                        marginLeft: "10px",
+                        color: "white",
+                      }}
+                    />
+                  ) : (
+                    <ExpandMore
+                      style={{
+                        marginLeft: "10px",
+                        color: "white",
+                      }}
+                    />
+                  )}
+                </ListItemButton>
+                <Collapse
+                  in={open}
+                  timeout="auto"
+                  unmountOnExit
+                  style={{
+                    paddingLeft: !isCollapsed ? "20px" : 0,
+                  }}
+                >
+                  <Item
                                         title="Account"
                                         to="account"
                                         icon={<AccountCircleOutlined />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     />
-                                    <Item
-                                        title="Post Management"
-                                        to=""
-                                        icon={<HomeOutlinedIcon />}
-                                        selected={selected}
-                                        setSelected={setSelected}
-                                    />
-                                    <Item
-                                title="Wallet Transaction"
-                                to="wallet"
-                                icon={<WalletOutlinedIcon />}
-                                selected={selected}
-                                setSelected={setSelected}
-                            />
-                                    {/* <Item
+                  <Item
+                    title="Post Management"
+                    to=""
+                    icon={<HomeOutlinedIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Wallet Transaction"
+                    to="wallet"
+                    icon={<WalletOutlinedIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  {/* <Item
                                         title="Quà Tặng"
                                         to="item"
                                         icon={<RedeemIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     /> */}
-                                    {/* <Item
+                  {/* <Item
                                         title="Subscription"
                                         to="package"
                                         icon={<SubscriptionsIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
                                     /> */}
-                                    <Item
-                                        title="Report"
-                                        to="report"
-                                        icon={<ReportGmailerrorredIcon />}
-                                        selected={selected}
-                                        setSelected={setSelected}
-                                    />
-                                </Collapse>
-                            </List>
-                            <Divider />
-                        </Box>
-                    </Menu>
-                </ProSidebar>
+                  <Item
+                    title="Report"
+                    to="report"
+                    icon={<ReportGmailerrorredIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </Collapse>
+              </List>
+              <Divider />
             </Box>
-        </div>
-    );
+          </Menu>
+        </ProSidebar>
+      </Box>
+    </div>
+  );
 };
 
 export default Sidebar;

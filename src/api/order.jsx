@@ -15,11 +15,11 @@ export const getOrdersFromShop = async (id, pageNumber, pageSize) => {
 };
 
 export const getOrderDetail = async (id) => {
-    const response = await api.get(`/api/v1/order/${id}`);
+    const response = await api.get(`/api/v1/Order/CancleOrder`);
     return response.data;
 };
 
 export const cancelOrder = async (id) => {
-    const response = await api.put(`/api/v1/Order/CancleOrder`);
+    const response = await api.put(`/api/v1/Order/CancleOrder/${id}`);
     return response.data;
 };

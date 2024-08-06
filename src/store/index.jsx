@@ -6,8 +6,6 @@ import { staffsSlice } from "./features/user.slice/staffs.slice";
 import { allAccountsSlice } from "./features/user.slice/allAccounts.slice";
 import { allVerifyUsersSlice } from "./features/user.slice/allVerifyUsers.slice"; //allVerifyUsers
 
-
-
 import { petDetailSlice } from "./features/pet.slice/petDetail.slice";
 import { petsFromShopSlice } from "./features/pet.slice/petsFromShop.slice";
 import { petsFromAreaSlice } from "./features/pet.slice/petsFromArea.slice";
@@ -21,14 +19,11 @@ import { eventDetailForCustomerSlice } from "./features/event.slice/eventDetailF
 import { joinEventsSlice } from "./features/event.slice/joinEvents.slice";
 import { allEventSubmitsSlice } from "./features/event.slice/allEventSubmits.slice";
 
-
-
 import { commentSlice } from "./features/comment.slice/comment.slice";
 import { replySlice } from "./features/comment.slice/reply.slice";
 import { commentDetailSlice } from "./features/comment.slice/commentDetail.slice";
 import { postCategorySlice } from "./features/postCategory.slice/postCategory.slice";
-
-
+import { postCategoryDetailSlice } from "./features/postCategory.slice/postCategoryDetail.slice";
 
 import { petCoffeeShopDetailSlice } from "./features/petCoffeeShop.slice/petCoffeeShopDetail.slice";
 import { allPetCoffeeShopsSlice } from "./features/petCoffeeShop.slice/allPetCoffeeShops.slice";
@@ -81,82 +76,81 @@ import { productDetailSlice } from "./features/product.slice/productDetail.slice
 import { productsFromShopSlice } from "./features/product.slice/productsFromShop.slice";
 
 export const store = configureStore({
-    reducer: {
-        userDetail: userDetailSlice.reducer,
-        userData: userDataSlice.reducer,
-        staffs: staffsSlice.reducer,
-        allAccounts: allAccountsSlice.reducer,
-        allVerifyUsers: allVerifyUsersSlice.reducer,
+  reducer: {
+    userDetail: userDetailSlice.reducer,
+    userData: userDataSlice.reducer,
+    staffs: staffsSlice.reducer,
+    allAccounts: allAccountsSlice.reducer,
+    allVerifyUsers: allVerifyUsersSlice.reducer,
 
-        petDetail: petDetailSlice.reducer,
-        petsFromShop: petsFromShopSlice.reducer,
-        petsFromArea: petsFromAreaSlice.reducer,
+    petDetail: petDetailSlice.reducer,
+    petsFromShop: petsFromShopSlice.reducer,
+    petsFromArea: petsFromAreaSlice.reducer,
 
-        petCoffeeShopDetail: petCoffeeShopDetailSlice.reducer,
-        allPetCoffeeShops: allPetCoffeeShopsSlice.reducer,
-        petCoffeeShops: petCoffeeShopsSlice.reducer,
-        petCoffeeShopTaxCode: petCoffeeShopTaxCodeSlice.reducer,
-        popularPetCoffeeShops: popularPetCoffeeShopsSlice.reducer,
-        randomPetCoffeeShops: randomPetCoffeeShopsSlice.reducer,
+    petCoffeeShopDetail: petCoffeeShopDetailSlice.reducer,
+    allPetCoffeeShops: allPetCoffeeShopsSlice.reducer,
+    petCoffeeShops: petCoffeeShopsSlice.reducer,
+    petCoffeeShopTaxCode: petCoffeeShopTaxCodeSlice.reducer,
+    popularPetCoffeeShops: popularPetCoffeeShopsSlice.reducer,
+    randomPetCoffeeShops: randomPetCoffeeShopsSlice.reducer,
 
-        allFollowShops: allFollowShopsSlice.reducer,
+    allFollowShops: allFollowShopsSlice.reducer,
 
-        reply: replySlice.reducer,
-        comment: commentSlice.reducer,
-        commentDetail: commentDetailSlice.reducer,
+    reply: replySlice.reducer,
+    comment: commentSlice.reducer,
+    commentDetail: commentDetailSlice.reducer,
 
-        postCategory: postCategorySlice.reducer,
+    postCategory: postCategorySlice.reducer,
+    postCategoryDetailSlice: postCategoryDetailSlice.reducer,
 
-        areasFromShop: areasFromShopSlice.reducer,
-        areaDetail: areaDetailSlice.reducer,
+    areasFromShop: areasFromShopSlice.reducer,
+    areaDetail: areaDetailSlice.reducer,
 
-        eventDetail: eventDetailSlice.reducer,
-        eventsFromShop: eventsFromShopSlice.reducer,
-        eventDetailForCustomer: eventDetailForCustomerSlice.reducer,
-        joinEvents: joinEventsSlice.reducer,
-        allEventSubmits: allEventSubmitsSlice.reducer,
+    eventDetail: eventDetailSlice.reducer,
+    eventsFromShop: eventsFromShopSlice.reducer,
+    eventDetailForCustomer: eventDetailForCustomerSlice.reducer,
+    joinEvents: joinEventsSlice.reducer,
+    allEventSubmits: allEventSubmitsSlice.reducer,
 
+    postDetail: postDetailSlice.reducer,
+    post: postSlice.reducer,
 
-        
-        postDetail: postDetailSlice.reducer,
-        post: postSlice.reducer,
+    allItems: allItemsSlice.reducer,
+    itemDetail: itemDetailSlice.reducer,
+    itemsFromUser: itemsFromUserSlice.reducer,
 
-        allItems: allItemsSlice.reducer,
-        itemDetail: itemDetailSlice.reducer,
-        itemsFromUser: itemsFromUserSlice.reducer,
+    wallet: walletSlice.reducer,
+    shopMonthIncome: shopMonthIncomeSlice.reducer,
+    managerMonthIncome: managerMonthIncomeSlice.reducer,
+    managerMonthOutcome: managerMonthOutcomeSlice.reducer,
+    shopMonthOutcome: shopMonthOutcomeSlice.reducer,
+    managerIncome: managerIncomeSlice.reducer,
+    managerOutcome: managerOutcomeSlice.reducer,
+    shopOutcome: shopOutcomeSlice.reducer,
+    shopIncome: shopIncomeSlice.reducer,
+    platformIncome: platformIncomeSlice.reducer,
+    platformMonthIncome: platformMonthIncomeSlice.reducer,
 
-        wallet: walletSlice.reducer,
-        shopMonthIncome: shopMonthIncomeSlice.reducer,
-        managerMonthIncome: managerMonthIncomeSlice.reducer,
-        managerMonthOutcome: managerMonthOutcomeSlice.reducer,
-        shopMonthOutcome: shopMonthOutcomeSlice.reducer,
-        managerIncome: managerIncomeSlice.reducer,
-        managerOutcome: managerOutcomeSlice.reducer,
-        shopOutcome: shopOutcomeSlice.reducer,
-        shopIncome: shopIncomeSlice.reducer,
-        platformIncome: platformIncomeSlice.reducer,
-        platformMonthIncome: platformMonthIncomeSlice.reducer,
+    packages: packagesSlice.reducer,
+    packageDetail: packageDetailSlice.reducer,
 
-        packages: packagesSlice.reducer,
-        packageDetail: packageDetailSlice.reducer,
+    allReports: allReportsSlice.reducer,
+    shopReports: shopReportsSlice.reducer,
 
-        allReports: allReportsSlice.reducer,
-        shopReports: shopReportsSlice.reducer,
+    transactionDetail: transactionDetailSlice.reducer,
+    transactionsFromShop: transactionsFromShopSlice.reducer,
 
-        transactionDetail: transactionDetailSlice.reducer,
-        transactionsFromShop: transactionsFromShopSlice.reducer,
+    allOrders: allOrdersSlice.reducer,
+    ordersFromShop: ordersFromShopSlice.reducer,
+    orderDetail: orderDetailSlice.reducer,
 
-        allOrders: allOrdersSlice.reducer,
-        ordersFromShop: ordersFromShopSlice.reducer,
-        orderDetail: orderDetailSlice.reducer,
+    allNotifications: allNotificationsSlice.reducer,
+    unreadNotifications: unreadNotificationsSlice.reducer,
 
-        allNotifications: allNotificationsSlice.reducer,
-        unreadNotifications: unreadNotificationsSlice.reducer,
+    promotionDetail: promotionDetailSlice.reducer,
+    promotionsFromShop: promotionsFromShopSlice.reducer,
 
-        promotionDetail: promotionDetailSlice.reducer,
-        promotionsFromShop: promotionsFromShopSlice.reducer,
-
-        productDetail: productDetailSlice.reducer,
-        productsFromShop: productsFromShopSlice.reducer,
-    },
+    productDetail: productDetailSlice.reducer,
+    productsFromShop: productsFromShopSlice.reducer,
+  },
 });

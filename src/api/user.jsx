@@ -68,6 +68,10 @@ export const banUser = async (userId) => {
   const response = await api.delete(`/api/v1/User/BanUser/${userId}`); //ban the user in account
   return response.data;
 };
+export const changeRoleUser = async (userId) => {
+  const response = await api.put(`/api/v1/User/CreateModerator/${userId}`); //ban the user in account
+  return response.data;
+};
 
 export const denyUser = async (id) => {
   const response = await api.put(`/api/v1/VerifyUses/DenyUser/${id}`);//deny the user in verification
@@ -75,7 +79,7 @@ export const denyUser = async (id) => {
 };
 
 export const getUserDetail = async (id) => {
-  const response = await api.get(`/api/v1/auths/${id}`);
+  const response = await api.get(`/api/v1/VerifyUses/detail/${id}`);
   return response.data;
 };
 

@@ -23,8 +23,8 @@ import {
   approveUser,
   denyUser,
   banUser,
-  unbanUser
-
+  unbanUser,
+  changeRoleUser
 } from "../../api/user";
 
 export const updateStaffPasswordThunk = createAsyncThunk(
@@ -168,6 +168,17 @@ export const banUserThunk = createAsyncThunk(
   async (userId, thunkAPI) => {
     try {
       const response = await banUser(userId);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error?.response?.data);
+    }
+  }
+);
+export const changeRoleUserThunk = createAsyncThunk(
+  "users/changeRoleUser",
+  async (userId, thunkAPI) => {
+    try {
+      const response = await changeRoleUser(userId);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error?.response?.data);

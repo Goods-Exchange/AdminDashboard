@@ -27,7 +27,7 @@ import {
   CustomNoRowsOverlay,
   GridLoadingOverlay,
 } from "../../../../components/styledTable/styledTable";
-import { postSelector} from "../../../../store/sellectors";
+import { postSelector,postDetailSelector} from "../../../../store/sellectors";
 // import { CategoryList } from "../../../platformStaff/screens/categoryList/categorydetail/categorydetail";
 
 // import "./accountTable.css";
@@ -36,6 +36,7 @@ const ShopTableStaff = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const accounts = useSelector(postSelector);
+  // const shopDetail = useSelector(postDetailSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(5); // State for number of rows per page
@@ -304,6 +305,11 @@ const ShopTableStaff = () => {
             Pagination: CustomFooter, // Custom footer component
           }}
         />
+          {/* <ShopBackdrop
+                    open={open}
+                    handleClose={handleClose}
+                    shopDetail={shopDetail}
+                /> */}
       </Box>
     </Box>
   );
