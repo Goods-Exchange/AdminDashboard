@@ -1,0 +1,146 @@
+.login {
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1066%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M1362.263740931461-31.387912730815625L1341.30317725369 23.216222495963528 1433.6896619327442 27.355000399230356z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1190.996%2c277.324C1219.946%2c277.608%2c1252.991%2c281.308%2c1269.591%2c257.589C1287.936%2c231.377%2c1283.882%2c195.523%2c1267.466%2c168.062C1251.478%2c141.317%2c1222.156%2c126.031%2c1190.996%2c126.117C1159.989%2c126.202%2c1130.897%2c141.711%2c1115.249%2c168.48C1099.456%2c195.497%2c1097.152%2c230.387%2c1115.028%2c256.073C1131.126%2c279.206%2c1162.814%2c277.047%2c1190.996%2c277.324' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1154.409%2c380.945C1177.24%2c380.942%2c1197.49%2c366.816%2c1208.403%2c346.762C1218.847%2c327.572%2c1217.228%2c304.548%2c1206.272%2c285.646C1195.351%2c266.803%2c1176.187%2c253.762%2c1154.409%2c253.607C1132.373%2c253.45%2c1112.304%2c265.833%2c1101.251%2c284.898C1090.162%2c304.024%2c1089.688%2c327.432%2c1100.394%2c346.775C1111.452%2c366.754%2c1131.574%2c380.948%2c1154.409%2c380.945' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M32.21646922456569 567.5370059375423L166.48313699928104 619.2240185321095 148.97981596435423 494.68141799902014z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M537.741%2c599.543C576.923%2c599.734%2c610.412%2c574.583%2c630.409%2c540.888C650.884%2c506.388%2c656.53%2c465.011%2c638.998%2c428.926C618.969%2c387.701%2c583.558%2c348.951%2c537.741%2c350.154C493.164%2c351.325%2c464.594%2c393.813%2c445.298%2c434.014C428.913%2c468.151%2c428.16%2c506.934%2c446.623%2c539.994C465.585%2c573.947%2c498.852%2c599.354%2c537.741%2c599.543' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M382.977%2c667.872C414.66%2c667.438%2c444.744%2c652.071%2c460.327%2c624.481C475.672%2c597.313%2c470.247%2c565.36%2c456.769%2c537.219C440.615%2c503.492%2c420.313%2c465.095%2c382.977%2c462.982C343.431%2c460.744%2c310.738%2c492.471%2c293.15%2c527.961C277.433%2c559.676%2c282.742%2c596.868%2c301.865%2c626.653C319.427%2c654.007%2c350.474%2c668.317%2c382.977%2c667.872' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M166.71969952257584 530.9551137619386L317.4842203717071 588.8281910752671 375.3572976850356 438.06367022613574 224.5927768359043 380.19059291280735z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M86.7940969698138 175.14392094596838L108.69198227486552 313.4017274589189 246.9497887878161 291.50384215386714 225.05190348276432 153.24603564091663z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1446.3355907143507 97.56710076279985L1444.1821698567574-25.802297543603913 1320.8127715503535-23.64887668601051 1322.966192407947 99.72052162039326z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1044.3593534906042 244.25864695159828L1078.6989600565494 170.61712302335349 951.0668708812096 155.9284751385582z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M314.6623262068741-44.29301570252099L399.1386705604672 108.44946108629065 479.994379277279-20.946721443308945z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M462.31118551007603 268.8496898433133L486.2307757784301 364.7859264296171 582.167012364734 340.8663361612631 558.2474220963799 244.93009957495926z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M205.274%2c264.427C262.155%2c268.614%2c327.224%2c256.732%2c353.983%2c206.364C379.862%2c157.653%2c346.274%2c102.65%2c315.567%2c56.829C289.33%2c17.679%2c252.306%2c-12.538%2c205.274%2c-15.537C152.205%2c-18.921%2c93.866%2c-5.217%2c67.591%2c41.015C41.523%2c86.883%2c62.518%2c142.032%2c90.197%2c186.946C116.2%2c229.14%2c155.845%2c260.788%2c205.274%2c264.427' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1211.7153953832765 463.4131490726113L1140.929630560815 536.7139543311204 1214.230435819324 607.499719153582 1285.0162006417854 534.1989138950728z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M970.2923545352305 217.74462049681128L1133.9129905322548 234.94184231696207 1151.1102123524056 71.32120631993772 987.4895763553812 54.12398449978693z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M539.3565320089406 557.0760761903804L544.338088474356 414.42296350359766 396.70341932215786 552.0945197249649z' fill='rgba(13%2c 116%2c 226%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1066'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* width: 100%;
+    height: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login .login__form {
+    width: 25%;
+    height: 70vh;
+    background: rgba(41, 72, 90, 0.7); /* Nền màu mờ đục với độ mờ 0.7 */
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: blur(5px); /* Hiệu ứng làm mờ nền phía sau */
+    box-shadow: 0 0 10px 5px rgba(30, 30, 29, 0.7);
+}
+
+.login .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login .login__title {
+    font-size: 35px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #00caff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+.login .login__view__password__btn {
+    cursor: pointer;
+    color: #00caff;
+}
+
+.login .login__validation__error {
+    padding-left: 10px;
+    height: 12px;
+    color: #d32f2f;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Thêm hiệu ứng rung động */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(0); }
+    75% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .login .login__btn {
+    text-transform: capitalize !important;
+    font-weight: 700 !important;
+    font-family: "Inter", sans-serif !important;
+    font-size: 20px;
+    background-color: primary;
+    transition: background-color 0.3s;
+  }
+  
+  .login .login__btn:hover {
+    background-color: #32508E;
+    animation: shake 0.5s;
+  }
+
+.login .login__link {
+    color: #8b8b8b !important;
+    text-align: right;
+}
+
+.login .login__link__btn {
+    text-decoration: none;
+}
+
+.login .login__forgot {
+    text-decoration: none;
+    color: #70d8bd;
+}
+
+.login .login__google {
+    margin-top: 20px;
+}
+
+.login .login__flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.login .login__divide {
+    border-bottom: solid 1px #70d8bd;
+    width: 35%;
+}
+
+/* .login .login__google__btn {
+    cursor: pointer;
+    border: solid 2px #55ab95;
+    border-radius: 5px;
+    padding: 5px 0;
+    margin-top: 15px;
+}
+
+.login .login__google__btn:hover {
+    background-color: #419781;
+    border: solid 2px #8b8b8b65;
+    transition: 0.4s;
+}
+
+.login .login__google__btn:hover .login__google__text {
+    color: #fff;
+}
+
+.login .login__google__img {
+    width: 7%;
+    height: 7%;
+} */
+
+.login .body_login_img {
+    max-width: 200%;
+    height: auto;
+    border-radius: 8px; /* Tùy chọn, để tạo hiệu ứng viền bo tròn nếu cần */
+    transition: box-shadow 0.3s ease-in-out;
+    
+}
+
+.login__form input {
+
+    color: black;
+  }
+  
+ 

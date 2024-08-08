@@ -1,0 +1,18 @@
+/* styles.css */
+.status-not-ban {
+  background-color: rgba(0, 167, 111, 0.16);
+  color: #007867; /* Màu chữ trắng */
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-align: center;
+  width: 60px;
+}
+
+.status-ban {
+  background-color: rgba(255, 86, 48, 0.16);
+  color: #b71d18; /* Màu chữ trắng */
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-align: center;
+ width: 60px;
+}
