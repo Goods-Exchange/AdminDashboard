@@ -314,21 +314,22 @@ export default function UpdatePackage() {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      description: packageDetail.description || '',
+      // description: packageDetail.description || '',
       expiryMonth: packageDetail.expiryMonth || '',
       price: packageDetail.price || '',
       subcriptionType: packageDetail.subcriptionType || '',
     },
     validationSchema: Yup.object({
-      description: Yup.string().required("Mô tả không thể trống"),
       expiryMonth: Yup.number().required("Tháng không thể trống"),
+      price: Yup.number().required("Giá không thể trống"),
+      subcriptionType: Yup.string().required("Mô tả không thể trống"),
     }),
     onSubmit: async (values) => {
       setShowLoadingModal(true);
       dispatch(
         updatePackageThunk({
           id: packageId,
-          description: values.description,
+          // description: values.description,
           expiryMonth: values.expiryMonth,
           price: values.price,
           subcriptionType: values.subcriptionType,
@@ -411,7 +412,7 @@ export default function UpdatePackage() {
             id="expiryMonth"
             label={
               <span>
-                Thời Hạn (tháng) <span style={{ color: "red" }}>*</span>
+                Thời Hạn (Date) <span style={{ color: "red" }}>*</span>
               </span>
             }
             variant="outlined"
@@ -439,36 +440,36 @@ export default function UpdatePackage() {
             </div>
           )}
           {/* description */}
-          <TextField
-            id="description"
-            label={
-              <span>
-                Mô tả <span style={{ color: "red" }}>*</span>
-              </span>
-            }
-            variant="outlined"
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            fullWidth
-            autoComplete="description"
-            margin="dense"
-            color="secondary"
-            InputLabelProps={{
-              style: { color: "black" },
-            }}
-            InputProps={{
-              style: {
-                backgroundColor: "#f5f5f5",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                color: "black",
-              },
-            }}
-          />
-          {formik.touched.description && formik.errors.description && (
-            <div className="login__validation__error">
-              <p>{formik.errors.description}</p>
-            </div>
-          )}
+            {/* <TextField
+              id="description"
+              label={
+                <span>
+                  Mô tả <span style={{ color: "red" }}>*</span>
+                </span>
+              }
+              variant="outlined"
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              fullWidth
+              autoComplete="description"
+              margin="dense"
+              color="secondary"
+              InputLabelProps={{
+                style: { color: "black" },
+              }}
+              InputProps={{
+                style: {
+                  backgroundColor: "#f5f5f5",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  color: "black",
+                },
+              }}
+            />
+            {formik.touched.description && formik.errors.description && (
+              <div className="login__validation__error">
+                <p>{formik.errors.description}</p>
+              </div>
+            )} */}
           {/* price */}
           <TextField
             id="price"

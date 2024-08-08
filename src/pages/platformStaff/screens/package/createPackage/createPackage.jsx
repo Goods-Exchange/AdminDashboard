@@ -33,20 +33,22 @@ export default function CreatePackage() {
 
     const formik = useFormik({
         initialValues: {
-            description: "",
+            // description: "",
             expiryMonth: "",
             price: "",
             subcriptionType: "",
         },
         validationSchema: Yup.object({
-            description: Yup.string().required("Mô tả không thể trống"),
+            // description: Yup.string().required("Mô tả không thể trống"),
             expiryMonth: Yup.number().required("Tháng không thể trống"),
+            price: Yup.number().required("Giá không thể trống"),
+            subcriptionType: Yup.string().required("Mô tả không thể trống"),
         }),
         onSubmit: async (values) => {
             setShowLoadingModal(true);
             dispatch(
                 createPackageThunk({
-                    description: values.description,
+                    // description: values.description,
                     expiryMonth: values.expiryMonth,
                     price: values.price,
                     subcriptionType: values.subcriptionType,
@@ -127,7 +129,7 @@ export default function CreatePackage() {
                         )}
                 </>
                 {/* description */}
-                <>
+                {/* <>
                     <TextField
                         id="description"
                         label={
@@ -159,14 +161,14 @@ export default function CreatePackage() {
                                 <p>{formik.errors.description}</p>
                             </div>
                         )}
-                </>
+                </> */}
                 {/* expiryMonth */}
                 <>
                     <TextField
                         id="expiryMonth"
                         label={
                             <span>
-                                Thời Hạn (tháng) <span style={{ color: "red" }}>*</span>
+                                Thời Hạn (ngày) <span style={{ color: "red" }}>*</span>
                             </span>
                         }
                         variant="outlined"

@@ -16,11 +16,6 @@ import { tokens } from "../../../../theme";
 import Header from "../../components/header/Header";
 import { allOrdersSelector } from "../../../../store/sellectors";
 import {
-  getAllUsersThunk,
-  banUserThunk,
-  unbanUserThunk,
-} from "../../../../store/apiThunk/userThunk";
-import {
   getAllOrdersThunk,
   cancelOrderThunk,
 } from "../../../../store/apiThunk/orderThunk";
@@ -34,40 +29,17 @@ import "./ordertrack.css";
 const OrdertrackTable = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const accounts = useSelector(allOrdersSelector);
+  const orders = useSelector(allOrdersSelector);
   const dispatch = useDispatch();
   const [showLoadingModal, setShowLoadingModal] = useState(false);
-  const [pageSize, setPageSize] = useState(5); // State for number of rows per page
-  const [pageNumber, setPageNumber] = useState(0); // Current page index
+  const [pageSize, setPageSize] = useState(5);
+  const [pageNumber, setPageNumber] = useState(0);
 
   useEffect(() => {
     dispatch(getAllOrdersThunk());
   }, [dispatch]);
 
-  const handleAccept = (id) => {
-    setShowLoadingModal(true);
-    dispatch(banUserThunk(id))
-      .then(() => {
-        dispatch(getAllOrdersThunk()).then(() => {
-          setShowLoadingModal(false);
-          Swal.fire({
-            title: "Success!",
-            text: "User has been approved.",
-            icon: "success",
-          });
-        });
-      })
-      .catch((error) => {
-        setShowLoadingModal(false);
-        Swal.fire({
-          title: "Error!",
-          text: "There was an issue approving the user.",
-          icon: "error",
-        });
-      });
-  };
-
-  const handleDeny = (id) => {
+  const handleCancel = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -75,15 +47,15 @@ const OrdertrackTable = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
         setShowLoadingModal(true);
         dispatch(cancelOrderThunk(id)).then(() => {
           dispatch(getAllOrdersThunk()).then(() => {
             Swal.fire({
-              title: "Cancel!",
-              text: "Your file has been cancel.",
+              title: "Cancelled!",
+              text: "The order has been cancelled.",
               icon: "success",
             }).then(() => {
               setShowLoadingModal(false);
@@ -93,6 +65,7 @@ const OrdertrackTable = () => {
       }
     });
   };
+
   const Header = ({
     title,
     subtitle,
@@ -105,7 +78,7 @@ const OrdertrackTable = () => {
           style={{
             fontFamily: "Source Sans Pro, sans-serif",
             fontSize: "32px",
-            color: "black",
+            color: titleColor,
             fontWeight: "700",
           }}
         >
@@ -154,7 +127,6 @@ const OrdertrackTable = () => {
         );
       },
     },
-
     {
       field: "senderUsername",
       headerName: "Sender Name",
@@ -175,7 +147,6 @@ const OrdertrackTable = () => {
         );
       },
     },
-
     {
       field: "postTitle",
       headerName: "Post Title",
@@ -212,34 +183,38 @@ const OrdertrackTable = () => {
       headerName: "Action",
       headerAlign: "center",
       flex: 1,
-      renderCell: ({ row: { id } }) => {
-        return (
-          <Box width="100%" display="flex" justifyContent="center" gap="4px">
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: colors.blueAccent[400],
-                minWidth: "50px",
-                textTransform: "capitalize",
-              }}
-              onClick={() => handleDeny(id)}
-            >
-              Cancel
-            </Button>
-          </Box>
-        );
+      renderCell: ({ row: { id, orderStatus } }) => {
+        if (["Delivered", "Confirm", "Accept"].includes(orderStatus)) {
+          return (
+            <Box width="100%" display="flex" justifyContent="center" gap="4px">
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: colors.blueAccent[400],
+                  minWidth: "50px",
+                  textTransform: "capitalize",
+                }}
+                onClick={() => handleCancel(id)}
+              >
+                Cancel
+              </Button>
+            </Box>
+          );
+        } else {
+          return null;
+        }
       },
     },
   ];
 
   const rows =
-    accounts?.map((account, index) => ({
-      ...account,
+    orders?.map((order, index) => ({
+      ...order,
       order: index + 1,
-      id: account.id, // Ensure each row has a unique id
-      senderUsername: account.user.senderUsername, // Extract senderUsername
-      postTitle: account.post.postTitle,
-      postContent: account.post.postContent,
+      id: order.id,
+      senderUsername: order.user.senderUsername,
+      postTitle: order.post.postTitle,
+      postContent: order.post.postContent,
     })) || [];
 
   const handlePageChange = (newPage) => {
@@ -333,10 +308,10 @@ const OrdertrackTable = () => {
           pageSize={pageSize}
           page={pageNumber}
           onPageChange={handlePageChange}
-          rowCount={rows.length} // Total number of rows
+          rowCount={rows.length}
           rowsPerPageOptions={[]} // Hides the rows per page selector
           components={{
-            Pagination: CustomFooter, // Custom footer component
+            Pagination: CustomFooter,
           }}
         />
       </Box>

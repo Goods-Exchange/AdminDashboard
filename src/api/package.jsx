@@ -34,3 +34,14 @@ export const buyPackage = async (data) => {
     const response = await api.post(`/api/v1/shops/packages`, data);
     return response.data;
 };
+
+
+export const setStandardPackage = async (susbcriptionId) => {
+    const response = await api.patch(`/api/v1/Subcription/UnPrioritySubscription/${susbcriptionId}`);
+    return response.data;
+};
+
+export const setPriorityPackage = async (susbcriptionId) => {
+    const response = await api.patch(`/api/v1/Subcription/PrioritySubscription/${susbcriptionId}`);
+    return response.data;
+};

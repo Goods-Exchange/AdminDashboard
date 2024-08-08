@@ -6,7 +6,9 @@ import {
     getPackages,
     updatePackage,
     getPackageDetail,
-    getAllSubscription
+    getAllSubscription,
+    setPriorityPackage,
+    setStandardPackage
 } from "../../api/package";
 
 export const getPackageDetailThunk = createAsyncThunk(
@@ -38,6 +40,32 @@ export const createPackageThunk = createAsyncThunk(
     async (data, thunkAPI) => {
         try {
             const response = await createPackage(data);
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+            
+        }
+    }
+);
+
+export const setStandardPackageThunk = createAsyncThunk(
+    "package/setStandardPackage",
+    async (susbcriptionId, thunkAPI) => {
+        try {
+            const response = await setStandardPackage(susbcriptionId);
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+            
+        }
+    }
+);
+
+export const setPriorityPackageThunk = createAsyncThunk(
+    "package/setPriorityPackage",
+    async (susbcriptionId, thunkAPI) => {
+        try {
+            const response = await setPriorityPackage(susbcriptionId);
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);

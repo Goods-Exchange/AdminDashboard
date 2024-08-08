@@ -2,9 +2,7 @@ import {
   Box,
   Button,
   useTheme,
-  FormControl,
-  InputLabel,
-  Select,
+  Menu,
   MenuItem,
   Typography,
 } from "@mui/material";
@@ -17,9 +15,10 @@ import { packagesSelector } from "../../../../../store/sellectors";
 import {
   deletePackageThunk,
   getPackagesThunk,
+  setPriorityPackageThunk,
+  setStandardPackageThunk
 } from "../../../../../store/apiThunk/packageThunk";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Coin from "../../../../../assets/coinvnd.png";
 import Pagination from "../../../../../components/pagination/paginationPackage";
@@ -38,9 +37,10 @@ import {
   ERRORTEXT,
   SUCCESSTEXT,
 } from "../../../../../components/text/notiText/notiText";
-import ExampleImage from "../../../../../assets/Sub.jpg";
+import { tokens } from "../../../../../theme";
 
 export default function PackageTable(props) {
+  const theme = useTheme();
   const direction = props.direction;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,134 +48,37 @@ export default function PackageTable(props) {
   const [showLoadingModal, setShowLoadingModal] = useState(false);
   const [pageSize, setPageSize] = useState(20);
   const [pageNumber, setPageNumber] = useState(1);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const colors = tokens(theme.palette.mode);
 
   const packagesData = formatPaginationData(packages, pageNumber, pageSize);
 
   useEffect(() => {
     setShowLoadingModal(true);
     dispatch(getPackagesThunk()).then(() => setShowLoadingModal(false));
-  }, []);
-  const Header = ({
-    title,
-    subtitle,
-    titleColor = "black",
-    subtitleColor = "gray",
-  }) => {
-    return (
-      <Box mb={2}>
-        <Typography
-          style={{
-            fontFamily: "Source Sans Pro, sans-serif",
-            fontSize: "32px",
-            color: "black",
-            fontWeight: "700",
-          }}
-        >
-          {title}
-        </Typography>
-        <Typography variant="subtitle1" style={{ color: subtitleColor }}>
-          {subtitle}
-        </Typography>
-      </Box>
-    );
+  }, [dispatch]);
+
+  const handleClick = (event, id) => {
+    setAnchorEl(event.currentTarget);
+    setSelectedPackage(id);
   };
-  const columns = [
-    {
-      field: "order",
-      headerName: "STT",
-      headerAlign: "center",
-      renderCell: ({ row: { order } }) => (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          width="100%"
-        >
-          {order}
-        </Box>
-      ),
-    },
-    {
-      field: "subcriptionType",
-      headerName: "Subscription Type",
-      flex: 1,
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "expiryMonth",
-      flex: 1,
-      headerName: "Expiry Month",
-      renderCell: ({ row: { expiryMonth } }) => <div>{expiryMonth} Tháng</div>,
-    },
-    {
-      field: "description",
-      flex: 1,
-      headerName: "Description",
-      renderCell: ({ row: { description } }) => <div>{description}</div>,
-    },
-    {
-      field: "price",
-      flex: 1,
-      headerAlign: "center",
-      headerName: "Price",
-      renderCell: ({ row: { price } }) => (
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          width="100%"
-          gap="6px"
-        >
-          {price}
-          <img src={Coin} alt="" style={{ width: "35px" }} />
-        </Box>
-      ),
-    },
 
-    {
-      field: "activity",
-      headerName: "Action",
-      flex: 1,
-      headerAlign: "center",
-      sortable: false,
-      disableColumnMenu: true,
-      renderCell: ({ row: { id } }) => (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          width="100%"
-          gap="10px"
-        >
-          <Button
-            variant="contained"
-            color="warning"
-            onClick={() =>
-              navigate(`/${direction}/updatePackage`, {
-                state: { packageId: id },
-              })
-            }
-            style={{ color: "white", textTransform: "capitalize" }}
-          >
-            Sửa
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            style={{ textTransform: "capitalize" }}
-            onClick={() => handleDeletePackage(id)}
-          >
-            Xóa
-          </Button>
-        </Box>
-      ),
-    },
-  ];
+  const handleClose = () => {
+    setAnchorEl(null);
+    setSelectedPackage(null);
+  };
 
-  const rows = packagesData?.items?.map((packageItem, index) => ({
-    ...packageItem,
-    order: index + 1,
-  }));
+  const handleMenuItemClick = (type) => {
+    setShowLoadingModal(true);
+    const action = type === "Priority" ? setPriorityPackageThunk : setStandardPackageThunk;
+    dispatch(action(selectedPackage)).then(() => {
+      dispatch(getPackagesThunk()).then(() => {
+        setShowLoadingModal(false);
+        handleClose();
+      });
+    });
+  };
 
   const handleDeletePackage = (id) => {
     Swal.fire({
@@ -225,13 +128,163 @@ export default function PackageTable(props) {
       }
     });
   };
+  const Header = ({
+    title,
+    subtitle,
+    titleColor = "black",
+    subtitleColor = "gray",
+  }) => {
+    return (
+      <Box mb={2}>
+        <Typography
+          style={{
+            fontFamily: "Source Sans Pro, sans-serif",
+            fontSize: "32px",
+            color: titleColor,
+            fontWeight: "700",
+          }}
+        >
+          {title}
+        </Typography>
+        <Typography variant="subtitle1" style={{ color: subtitleColor }}>
+          {subtitle}
+        </Typography>
+      </Box>
+    );
+  };
+  const columns = [
+    {
+      field: "order",
+      headerName: "STT",
+      headerAlign: "center",
+      renderCell: ({ row: { order } }) => (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+        >
+          {order}
+        </Box>
+      ),
+    },
+    {
+      field: "subcriptionType",
+      headerName: "Subscription Type",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "expiryMonth",
+      flex: 1,
+      headerName: "Expiry Date",
+      renderCell: ({ row: { expiryMonth } }) => <div>{expiryMonth} Ngày</div>,
+    },
+    {
+      field: "price",
+      flex: 1,
+      headerAlign: "center",
+      headerName: "Price",
+      renderCell: ({ row: { price } }) => (
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          width="100%"
+          gap="6px"
+        >
+          {price}
+          <img src={Coin} alt="" style={{ width: "35px" }} />
+        </Box>
+      ),
+    },
+    // {
+    //   field: "description",
+    //   flex: 1,
+    //   headerName: "Description",
+    //   renderCell: ({ row: { description } }) => <div>{description}</div>,
+    // },
+    {
+      field: "action",
+      headerName: "Action",
+      headerAlign: "center",
+      flex: 1,
+      renderCell: ({ row: { id, description } }) => (
+        <Box width="100%" display="flex" justifyContent="center" gap="4px">
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: description === "Priority" ? colors.blueAccent[800] : "#868dfb",
+              minWidth: "100px",
+              textTransform: "capitalize",
+            }}
+            onClick={(event) => handleClick(event, id)}
+          >
+            {description}
+          </Button>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={() => handleMenuItemClick("Standard")}>
+              Standard
+            </MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("Priority")}>
+              Priority
+            </MenuItem>
+          </Menu>
+        </Box>
+      ),
+    },
+    {
+      field: "activity",
+      headerName: "Action",
+      flex: 1,
+      headerAlign: "center",
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: ({ row: { id } }) => (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+          gap="10px"
+        >
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={() =>
+              navigate(`/${direction}/updatePackage`, {
+                state: { packageId: id },
+              })
+            }
+            style={{ color: "white", textTransform: "capitalize" }}
+          >
+            Sửa
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            style={{ textTransform: "capitalize" }}
+            onClick={() => handleDeletePackage(id)}
+          >
+            Xóa
+          </Button>
+        </Box>
+      ),
+    },
+  ];
+
+  const rows = packagesData?.items?.map((packageItem, index) => ({
+    ...packageItem,
+    order: index + 1,
+  }));
 
   return (
     <div className="packageTable">
-       {/* <img src={ExampleImage} alt="example" width="100%" height="auto" /> */}
       <Box m="20px">
-        {/* <div style={{color:"#3045FF", fontSize:34, fontWeight:900, marginLeft:550,fontFamily:'serif'}}>Subsciption</div>
-                      <div style={{color:"#2a2d64", fontSize:20, fontWeight:900,padding:20}}>Quản Lý Gói Đăng Ký Hệ Thống</div> */}
         <div
           style={{
             display: "flex",

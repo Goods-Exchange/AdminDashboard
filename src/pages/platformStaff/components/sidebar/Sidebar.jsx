@@ -176,27 +176,14 @@ const Sidebar = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  <Item
+                  {/* <Item
                     title="Wallet Transaction"
                     to="wallet"
                     icon={<WalletOutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}
-                  />
-                  {/* <Item
-                                        title="Quà Tặng"
-                                        to="item"
-                                        icon={<RedeemIcon />}
-                                        selected={selected}
-                                        setSelected={setSelected}
-                                    /> */}
-                  {/* <Item
-                                        title="Subscription"
-                                        to="package"
-                                        icon={<SubscriptionsIcon />}
-                                        selected={selected}
-                                        setSelected={setSelected}
-                                    /> */}
+                  /> */}
+                
                   <Item
                     title="Report"
                     to="report"
